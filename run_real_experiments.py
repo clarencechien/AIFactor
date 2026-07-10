@@ -1,14 +1,16 @@
 """ai_premium_tw — 真實資料實驗(TWSE 上市樣本)。
 
-前置:src/fetch_twse.py 抓完、src/build_panel.py 建好 data/processed/。
-因子:過渡代理 = SOX 週報酬對 S&P500 迴歸殘差(供給端純化,z-score)。
-     消費因子(OpenRouter/Wayback)因 web.archive.org 不在 egress 允許清單而缺席(FACTS 記錄)。
+前置:fetch_twse/fetch_tpex 抓完、build_panel.py 建好 data/processed/、
+     build_consumption_factor.py 產出 data/openrouter_weekly.csv。
+因子:consumption = OpenRouter 週 token log 成長 z-score(降級單腿,2024-03 起)
+     supply      = SOX 週報酬對 S&P500 迴歸殘差 z-score(供給端純化)
 
 跑:
-  R1  Design 1 事件研究(論文 IA.16 前沿日曆,T+1 五日 CAR,隔夜/盤中拆解,非前沿安慰劑)
-  R2  Design 2 單腿:capex/供給端因子 13 週滾動 beta 五分位 VW 排序 + FM + 動能糾纏
-      (以區間估計語言報告 — 見 reports/experiment_report.md E2P 的檢定力結論)
-  R3  Design 3 外資中介:5×2 雙重排序 + λ 水準對照 + 隔夜/盤中路徑分解
+  R1   Design 1 事件研究(消費 beta 分組;論文 IA.16 前沿日曆,T+1 五日 CAR,
+       隔夜/盤中拆解,非前沿安慰劑);R1b 用 SOX-殘差 beta 做穩健性
+  R2   Design 2 雙因子賽馬(H1 消費 vs H2 供給),五分位 VW 排序 + FM + 動能糾纏,
+       以區間估計語言報告(檢定力見 reports/experiment_report.md E2P)
+  R3   Design 3 外資中介:5×3 雙重排序 + λ 水準對照 + 隔夜/盤中路徑分解
 輸出 reports/real_results.json
 """
 from __future__ import annotations
@@ -68,11 +70,22 @@ def load_matrices():
     resid = pd.Series(sox_w.loc[idx].values - x @ coef, index=idx)
     factor_w = ((resid - resid.mean()) / resid.std())
 
-    # 對齊週索引
+    # 消費因子(降級單腿):OpenRouter 週 token log 成長,z-score。
+    # token 週為週一起算,對齊到該週的週五(+4 天);週末 token 溢入 ≈ 2/7,
+    # 屬對齊近似(FACTS 旗標),對共變估計影響二階。
+    orw = pd.read_csv(ROOT / "data" / "openrouter_weekly.csv",
+                      parse_dates=["week_monday"])
+    tok = pd.Series(orw["total_tokens"].values,
+                    index=orw["week_monday"] + pd.Timedelta(days=4))
+    g = np.log(tok).diff().dropna()
+    factor_cons = ((g - g.mean()) / g.std())
+
+    # 對齊週索引(交集以消費因子可得性為準 → 2024-03 起)
     weeks = ret_w.index.intersection(twii_w.dropna().index) \
-        .intersection(factor_w.index)
+        .intersection(factor_w.index).intersection(factor_cons.index)
     weeks = weeks[weeks >= "2024-01-01"]
-    ret_w, twii_w, factor_w = ret_w.loc[weeks], twii_w.loc[weeks], factor_w.loc[weeks]
+    ret_w, twii_w = ret_w.loc[weeks], twii_w.loc[weeks]
+    factor_w, factor_cons = factor_w.loc[weeks], factor_cons.loc[weeks]
 
     # 外資流:週累積買賣超金額佔市值比(×1e4 = bps)
     flow_val = (fnet * close).resample("W-FRI").sum()
@@ -81,14 +94,14 @@ def load_matrices():
 
     cap_form = cap_w.reindex(ret_w.index)  # VW 權重(形成週市值)
     return dict(close_d=close, open_d=open_, twii_d=twii, panel_dates=close.index,
-                ret_w=ret_w, twii_w=twii_w, factor_w=factor_w, flow_w=flow_w,
-                cap_w=cap_form)
+                ret_w=ret_w, twii_w=twii_w, factor_w=factor_w,
+                factor_cons=factor_cons, flow_w=flow_w, cap_w=cap_form)
 
 
-def compute_betas(m):
+def compute_betas(m, which: str = "cons"):
     R = m["ret_w"].values
-    b = rolling_ai_beta(R, m["factor_w"].values, m["twii_w"].values)
-    return b
+    f = m["factor_cons"].values if which == "cons" else m["factor_w"].values
+    return rolling_ai_beta(R, f, m["twii_w"].values)
 
 
 def design1(m, betas):
@@ -211,16 +224,24 @@ def design3(m, betas):
 def main():
     m = load_matrices()
     print(f"weeks={len(m['ret_w'])}, stocks={m['ret_w'].shape[1]}", flush=True)
-    betas = compute_betas(m)
-    print("betas done; coverage last week:",
-          int((~np.isnan(betas[-1])).sum()), flush=True)
+    b_cons = compute_betas(m, "cons")
+    b_sox = compute_betas(m, "sox")
+    print("betas done; coverage last week: cons",
+          int((~np.isnan(b_cons[-1])).sum()), "sox",
+          int((~np.isnan(b_sox[-1])).sum()), flush=True)
     out = {
-        "R1_design1_event_study": design1(m, betas),
-        "R2_design2_supply_factor_sort": design2(m, betas),
-        "R3_design3_flow_mediation": design3(m, betas),
+        "R1_design1_event_study_consbeta": design1(m, b_cons),
+        "R1b_design1_soxbeta_robustness": design1(m, b_sox),
+        "R2_horse_race": {
+            "consumption_openrouter": design2(m, b_cons),   # H1 主檢定
+            "supply_sox_residual": design2(m, b_sox),        # H2 代理
+        },
+        "R3_design3_flow_mediation_consbeta": design3(m, b_cons),
         "_meta": {
-            "sample": "TWSE 上市普通股(4 碼),價>10、市值>10億,未還原權息",
-            "factor": "SOX~SPX 週殘差 z-score(供給端過渡代理);消費因子缺席(Wayback 被 egress 擋)",
+            "sample": "TWSE+TPEx 普通股(4 碼),價>10、市值>10億,未還原權息",
+            "factors": ("consumption = OpenRouter 週 token log 成長 z-score"
+                        "(Wayback 縫合,2024-03 起,重疊驗證 max 0.04%);"
+                        "supply = SOX~SPX 週殘差 z-score"),
             "calendar": "論文 Table IA.16(19 前沿 + 28 非前沿)",
             "date": "2026-07-10",
         },
