@@ -44,6 +44,7 @@ def main() -> int:
     ap.add_argument("--start", default="2024-01-01")
     ap.add_argument("--end", default=dt.date.today().isoformat())
     ap.add_argument("--kind", choices=["price", "t86", "both"], default="both")
+    ap.add_argument("--pause", type=float, default=3.0)
     args = ap.parse_args()
 
     sys.path.insert(0, str(pathlib.Path(__file__).parent))
@@ -59,7 +60,7 @@ def main() -> int:
             fp = OUT_DIR / f"{k}_{d.isoformat()}.json"
             if fp.exists():
                 continue
-            data = fetch_day(d, k)
+            data = fetch_day(d, k, pause=args.pause)
             if data:
                 fp.write_text(json.dumps(data, ensure_ascii=False))
                 n_ok += 1

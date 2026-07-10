@@ -37,3 +37,9 @@ date_utc,provider,model,frontier_flag,source_url,verification_status,notes
 2025-05-28,DeepSeek,DeepSeek-R1-0528,0,https://api-docs.deepseek.com/news/news250528,kb_unverified,
 2025-08-21,DeepSeek,DeepSeek-V3.1,0,https://api-docs.deepseek.com/news/news250821,kb_unverified,日期近知識截止需覆核
 2025-09-29,DeepSeek,DeepSeek-V3.2-Exp,0,https://api-docs.deepseek.com/news/news250929,kb_unverified,日期近知識截止需覆核
+2026-02-05,Anthropic,Claude Opus 4.6,1,https://www.anthropic.com/news/claude-opus-4-6,websearch_secondary,自主 coding 里程碑;二手來源待官方核對
+2026-02-19,Google,Gemini 3.1 Pro,1,https://blog.google/products/gemini/,websearch_secondary,多模態推理;二手來源
+2026-03-05,OpenAI,GPT-5.4,1,https://openai.com/index/,websearch_secondary,Thinking 能力;二手來源
+2026-04-16,Anthropic,Claude Opus 4.7,1,https://www.anthropic.com/news/,websearch_secondary,論文 v2 §2 提及 Opus 4.7 佐證存在;二手來源
+2026-04-23,OpenAI,GPT-5.5,1,https://openai.com/index/,websearch_secondary,二手來源
+2026-04-24,DeepSeek,DeepSeek V4,1,https://api-docs.deepseek.com/,websearch_secondary,開源近前沿;二手來源
