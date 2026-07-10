@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+data/twse_raw/
+data/tpex_raw/
+data/openrouter_snapshots/

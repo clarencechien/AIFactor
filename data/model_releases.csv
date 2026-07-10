@@ -1,0 +1,39 @@
+date_utc,provider,model,frontier_flag,source_url,verification_status,notes
+2024-03-04,Anthropic,Claude 3 (Opus/Sonnet/Haiku),1,https://www.anthropic.com/news/claude-3-family,kb_unverified,首個宣稱超越 GPT-4 的家族
+2024-06-20,Anthropic,Claude 3.5 Sonnet,1,https://www.anthropic.com/news/claude-3-5-sonnet,kb_unverified,
+2024-10-22,Anthropic,Claude 3.5 Sonnet (new) + computer use,1,https://www.anthropic.com/news/3-5-models-and-computer-use,kb_unverified,agentic 里程碑
+2024-11-04,Anthropic,Claude 3.5 Haiku,0,https://www.anthropic.com/claude/haiku,kb_unverified,小模型
+2025-02-24,Anthropic,Claude 3.7 Sonnet,1,https://www.anthropic.com/news/claude-3-7-sonnet,kb_unverified,首個混合推理
+2025-05-22,Anthropic,Claude Opus 4 / Sonnet 4,1,https://www.anthropic.com/news/claude-4,kb_unverified,
+2025-08-05,Anthropic,Claude Opus 4.1,1,https://www.anthropic.com/news/claude-opus-4-1,kb_unverified,增量前沿
+2025-09-29,Anthropic,Claude Sonnet 4.5,1,https://www.anthropic.com/news/claude-sonnet-4-5,kb_unverified,
+2025-11-24,Anthropic,Claude Opus 4.5,1,https://www.anthropic.com/news/claude-opus-4-5,kb_unverified,日期近知識截止需覆核
+2024-05-13,OpenAI,GPT-4o,1,https://openai.com/index/hello-gpt-4o/,kb_unverified,多模態旗艦
+2024-07-18,OpenAI,GPT-4o mini,0,https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/,kb_unverified,
+2024-09-12,OpenAI,o1-preview / o1-mini,1,https://openai.com/index/introducing-openai-o1-preview/,kb_unverified,首個推理模型
+2024-12-05,OpenAI,o1 (full) + Pro,1,https://openai.com/index/o1-and-new-tools-for-developers/,kb_unverified,12 Days 第一天
+2025-01-31,OpenAI,o3-mini,0,https://openai.com/index/openai-o3-mini/,kb_unverified,
+2025-02-27,OpenAI,GPT-4.5 (research preview),1,https://openai.com/index/introducing-gpt-4-5/,kb_unverified,
+2025-04-14,OpenAI,GPT-4.1 family,0,https://openai.com/index/gpt-4-1/,kb_unverified,API 導向增量
+2025-04-16,OpenAI,o3 / o4-mini,1,https://openai.com/index/introducing-o3-and-o4-mini/,kb_unverified,
+2025-08-07,OpenAI,GPT-5,1,https://openai.com/index/introducing-gpt-5/,kb_unverified,
+2025-11-12,OpenAI,GPT-5.1,1,https://openai.com/index/gpt-5-1/,kb_unverified,日期近知識截止需覆核
+2024-02-08,Google,Gemini Advanced (Ultra 1.0),1,https://blog.google/products/gemini/bard-gemini-advanced-app/,kb_unverified,
+2024-02-15,Google,Gemini 1.5 Pro (1M context),1,https://blog.google/technology/ai/google-gemini-next-generation-model-february-2024/,kb_unverified,
+2024-05-14,Google,Gemini 1.5 Flash/Pro GA (I/O),1,https://blog.google/technology/ai/google-gemini-update-flash-ai-assistant-io-2024/,kb_unverified,
+2024-12-11,Google,Gemini 2.0 Flash,1,https://blog.google/technology/google-deepmind/google-gemini-ai-update-december-2024/,kb_unverified,agentic 定位
+2025-03-25,Google,Gemini 2.5 Pro,1,https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/,kb_unverified,
+2025-06-17,Google,Gemini 2.5 Flash/Pro GA + Flash-Lite,0,https://blog.google/products/gemini/gemini-2-5-model-family-expands/,kb_unverified,GA 事件
+2025-11-18,Google,Gemini 3 Pro,1,https://blog.google/products/gemini/gemini-3/,kb_unverified,日期近知識截止需覆核
+2024-04-18,Meta,Llama 3 (8B/70B),1,https://ai.meta.com/blog/meta-llama-3/,kb_unverified,開源前沿
+2024-07-23,Meta,Llama 3.1 405B,1,https://ai.meta.com/blog/meta-llama-3-1/,kb_unverified,首個開源 405B
+2024-09-25,Meta,Llama 3.2 (multimodal/edge),0,https://ai.meta.com/blog/llama-3-2-connect-2024-vision-edge-mobile-devices/,kb_unverified,
+2024-12-06,Meta,Llama 3.3 70B,0,https://ai.meta.com/blog/llama-3-3/,kb_unverified,
+2025-04-05,Meta,Llama 4 (Scout/Maverick),1,https://ai.meta.com/blog/llama-4-multimodal-intelligence/,kb_unverified,
+2024-05-06,DeepSeek,DeepSeek-V2,0,https://github.com/deepseek-ai/DeepSeek-V2,kb_unverified,MoE 低價開端
+2024-12-26,DeepSeek,DeepSeek-V3,1,https://api-docs.deepseek.com/news/news1226,kb_unverified,
+2025-01-20,DeepSeek,DeepSeek-R1,1,https://api-docs.deepseek.com/news/news250120,kb_unverified,最大市場衝擊事件(1/27 美股半導體重挫)
+2025-03-24,DeepSeek,DeepSeek-V3-0324,0,https://api-docs.deepseek.com/news/news250325,kb_unverified,
+2025-05-28,DeepSeek,DeepSeek-R1-0528,0,https://api-docs.deepseek.com/news/news250528,kb_unverified,
+2025-08-21,DeepSeek,DeepSeek-V3.1,0,https://api-docs.deepseek.com/news/news250821,kb_unverified,日期近知識截止需覆核
+2025-09-29,DeepSeek,DeepSeek-V3.2-Exp,0,https://api-docs.deepseek.com/news/news250929,kb_unverified,日期近知識截止需覆核
