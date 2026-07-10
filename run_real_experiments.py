@@ -140,10 +140,14 @@ def design1(m, betas):
         df = run_events(cal[cal.frontier_flag == flag])
         stats = {}
         for ch in ("total", "overnight", "intraday"):
-            x = df[ch].values
-            mean, t = newey_west_t(x, lags=0) if len(x) > 3 else (np.nan, np.nan)
-            stats[ch] = dict(mean_hl_pct=100 * mean, t=t,
-                             boot_p=block_bootstrap_pvalue(x) if len(x) > 3 else None)
+            x = df[ch].dropna().values
+            if len(x) > 3:
+                mean = float(x.mean())
+                t = mean / (x.std(ddof=1) / np.sqrt(len(x)))
+                bp = block_bootstrap_pvalue(x)
+            else:
+                mean, t, bp = np.nan, np.nan, None
+            stats[ch] = dict(mean_hl_pct=100 * mean, t=t, boot_p=bp, n=len(x))
         res[name] = dict(n_events=len(df), stats=stats,
                          per_event=df.to_dict("records"))
     return res

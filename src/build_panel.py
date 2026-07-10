@@ -87,6 +87,46 @@ def parse_t86_file(fp: pathlib.Path) -> pd.DataFrame | None:
     return pd.DataFrame(rows, columns=["date", "stock", "foreign_net_sh"])
 
 
+RAW_TPEX = ROOT / "data" / "tpex_raw"
+
+
+def parse_tpex_price(fp: pathlib.Path) -> pd.DataFrame | None:
+    d = json.loads(fp.read_text())
+    tbl = None
+    for t in d.get("tables", []):
+        f = [c.strip() for c in t.get("fields", [])]
+        if "代號" in f and "收盤" in f:
+            tbl = t
+            fields = f
+            break
+    if tbl is None:
+        return None
+    date = pd.to_datetime(fp.stem.split("_")[1])
+    ix = {k: fields.index(k) for k in ("代號", "名稱", "收盤", "開盤", "成交股數")}
+    rows = []
+    for r in tbl["data"]:
+        code = str(r[ix["代號"]]).strip()
+        if not re.fullmatch(r"[1-9]\d{3}", code):
+            continue
+        rows.append((date, code, str(r[ix["名稱"]]).strip(),
+                     _num(r[ix["開盤"]]), _num(r[ix["收盤"]]),
+                     _num(r[ix["成交股數"]]), np.nan))
+    return pd.DataFrame(rows, columns=["date", "stock", "name", "open", "close",
+                                       "volume", "amount"])
+
+
+def parse_tpex_inst(fp: pathlib.Path) -> pd.DataFrame | None:
+    d = json.loads(fp.read_text())
+    tbl = next((t for t in d.get("tables", []) if t.get("data")), None)
+    if tbl is None:
+        return None
+    date = pd.to_datetime(fp.stem.split("_")[1])
+    # 欄位群組:代號,名稱,(外資及陸資 買/賣/買賣超)…第 4 欄 = 外資買賣超
+    rows = [(date, str(r[0]).strip(), _num(r[4])) for r in tbl["data"]
+            if re.fullmatch(r"[1-9]\d{3}", str(r[0]).strip())]
+    return pd.DataFrame(rows, columns=["date", "stock", "foreign_net_sh"])
+
+
 def build() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     px, twii_rows = [], []
@@ -95,18 +135,34 @@ def build() -> None:
         if res is None:
             continue
         df, twii = res
+        df["market"] = "TWSE"
         px.append(df)
         twii_rows.append((df["date"].iloc[0], twii))
+    for fp in sorted(RAW_TPEX.glob("price_*.json")):
+        df = parse_tpex_price(fp)
+        if df is not None and len(df):
+            df["market"] = "TPEX"
+            px.append(df)
     prices = pd.concat(px, ignore_index=True)
+
     t86 = [x for fp in sorted(RAW_TWSE.glob("t86_*.json"))
            if (x := parse_t86_file(fp)) is not None]
-    flows = pd.concat(t86, ignore_index=True)
+    t86 += [x for fp in sorted(RAW_TPEX.glob("inst_*.json"))
+            if (x := parse_tpex_inst(fp)) is not None]
+    flows = pd.concat(t86, ignore_index=True) \
+        .drop_duplicates(subset=["date", "stock"])
     panel = prices.merge(flows, on=["date", "stock"], how="left")
 
-    # 已發行股數
+    # 已發行股數(上市 t187ap03_L + 上櫃 mopsfin_t187ap03_O)
     info = json.loads((ROOT / "data" / "t187ap03_L.json").read_text())
-    sh = pd.DataFrame([(c["公司代號"], _num(c["已發行普通股數或TDR原股發行股數"]))
-                       for c in info], columns=["stock", "shares_out"])
+    sh_l = [(c["公司代號"], _num(c["已發行普通股數或TDR原股發行股數"])) for c in info]
+    try:
+        info_o = json.loads((ROOT / "data" / "t187ap03_O.json").read_text())
+        sh_o = [(c["SecuritiesCompanyCode"], _num(c["IssueShares"])) for c in info_o]
+    except Exception:  # noqa: BLE001
+        sh_o = []
+    sh = pd.DataFrame(sh_l + sh_o, columns=["stock", "shares_out"]) \
+        .drop_duplicates(subset="stock")
     panel = panel.merge(sh, on="stock", how="left")
     panel["mktcap"] = panel["close"] * panel["shares_out"]
 
@@ -115,7 +171,8 @@ def build() -> None:
         .to_csv(OUT / "twii_daily.csv", index=False)
     sh.to_csv(OUT / "shares_outstanding.csv", index=False)
     print(f"panel: {panel.shape}, stocks: {panel['stock'].nunique()}, "
-          f"days: {panel['date'].nunique()}")
+          f"days: {panel['date'].nunique()}, "
+          f"tpex_share: {(panel['market'] == 'TPEX').mean():.2f}")
 
 
 if __name__ == "__main__":
