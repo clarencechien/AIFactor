@@ -1,0 +1,49 @@
+date_utc,provider,model,frontier_flag,source_domain,note,verification_status
+2024-04-18,Meta,Llama 3,1,ai.meta.com,Open model release; strong open-weight benchmark step,paper_ia16_verified
+2024-05-13,OpenAI,GPT-4o,1,openai.com,OpenAI flagship omni model,paper_ia16_verified
+2024-05-14,Google,Gemini 1.5 Flash,1,blog.google,Google I/O family update,paper_ia16_verified
+2024-06-21,Anthropic,Claude 3.5 Sonnet,1,anthropic.com,Anthropic frontier Sonnet,paper_ia16_verified
+2024-07-23,Meta,Llama 3.1 405B,1,ai.meta.com,First frontier-level open-source model per Meta,paper_ia16_verified
+2024-09-12,OpenAI,o1-preview,1,openai.com,First public reasoning-model series,paper_ia16_verified
+2024-10-22,Anthropic,Claude 3.5 Sonnet new,1,anthropic.com,Upgraded Sonnet + computer use beta,paper_ia16_verified
+2024-12-06,Meta,Llama 3.3 70B,1,ai.meta.com,Efficiency/cost-improved Llama,paper_ia16_verified
+2024-12-11,Google,Gemini 2.0,1,blog.google,Agentic-era model release,paper_ia16_verified
+2024-12-27,DeepSeek,DeepSeek-V3,1,arxiv.org,arXiv date for public paper/checkpoint,paper_ia16_verified
+2025-01-20,DeepSeek,DeepSeek-R1 release,1,docs.aws.amazon.com,Official launch per AWS Bedrock model card,paper_ia16_verified
+2025-01-27,DeepSeek,DeepSeek-R1 market recognition,1,axios.com,US market-recognition shock one week post-release,paper_ia16_verified
+2025-02-24,Anthropic,Claude 3.7 Sonnet,1,anthropic.com,Hybrid reasoning model,paper_ia16_verified
+2025-02-27,OpenAI,GPT-4.5,1,openai.com,Largest GPT research preview,paper_ia16_verified
+2025-03-25,Google,Gemini 2.5 Pro,1,blog.google,Google thinking model,paper_ia16_verified
+2025-04-05,Meta,Llama 4 Scout/Maverick,1,ai.meta.com,Open-weight multimodal Llama 4,paper_ia16_verified
+2025-04-14,OpenAI,GPT-4.1,1,openai.com,API model coding/long-context gains,paper_ia16_verified
+2025-04-16,OpenAI,o3 and o4-mini,1,openai.com,o-series reasoning with tool access,paper_ia16_verified
+2025-05-22,Anthropic,Claude 4,1,anthropic.com,Claude Opus 4 and Sonnet 4,paper_ia16_verified
+2025-08-07,OpenAI,GPT-5,1,openai.com,Unified GPT-5 system,paper_ia16_verified
+2024-03-11,Cohere,Command R,0,cohere.com,RAG/tool-use enterprise LLM,paper_ia16_verified
+2024-03-17,xAI,Grok-1 open weights,0,x.ai,314B MoE base Apache 2.0,paper_ia16_verified
+2024-03-27,Databricks,DBRX,0,databricks.com,132B MoE open LLM,paper_ia16_verified
+2024-03-28,AI21,Jamba,0,ai21.com,First production hybrid SSM-Transformer,paper_ia16_verified
+2024-04-04,Cohere,Command R+,0,cohere.com,Scaled-up RAG/tool-use LLM,paper_ia16_verified
+2024-04-15,Reka,Reka Core,0,reka.ai,Frontier-class multimodal,paper_ia16_verified
+2024-04-23,Microsoft,Phi-3 mini,0,azure.microsoft.com,3.8B SLM on Azure,paper_ia16_verified
+2024-05-13,01.AI,Yi-Large,0,x.com,01.AI closed-source frontier dense LLM,paper_ia16_verified
+2024-06-05,Zhipu,GLM-4-9B open weights,0,github.com,Open-weight GLM-4 variant,paper_ia16_verified
+2024-06-07,Alibaba,Qwen 2,0,qwenlm.github.io,Qwen 2 family open-source,paper_ia16_verified
+2024-07-24,Mistral,Mistral Large 2,0,mistral.ai,123B flagship dense LLM,paper_ia16_verified
+2024-08-01,Black Forest Labs,FLUX.1,0,bfl.ai,12B text-to-image family,paper_ia16_verified
+2024-08-13,xAI,Grok-2,0,x.ai,Grok-2 early preview on X,paper_ia16_verified
+2024-08-22,AI21,Jamba 1.5 family,0,ai21.com,Hybrid SSM-Transformer 256K context,paper_ia16_verified
+2024-09-19,Alibaba,Qwen 2.5,0,qwenlm.github.io,Apsara Conference open-source family,paper_ia16_verified
+2024-10-21,IBM,Granite 3.0,0,newsroom.ibm.com,Apache-2.0 enterprise family,paper_ia16_verified
+2024-11-05,Tencent,Hunyuan-Large,0,huggingface.co,389B MoE open-sourced,paper_ia16_verified
+2024-11-18,Mistral,Pixtral Large,0,mistral.ai,124B multimodal open weights,paper_ia16_verified
+2024-11-28,Alibaba,QwQ-32B-Preview,0,qwenlm.github.io,Open-weight reasoning preview,paper_ia16_verified
+2024-12-03,Amazon,Nova family,0,press.aboutamazon.com,Bedrock foundation models at re:Invent,paper_ia16_verified
+2024-12-12,Microsoft,Phi-4,0,huggingface.co,14B reasoning SLM,paper_ia16_verified
+2025-01-22,ByteDance,Doubao 1.5 Pro,0,seed.bytedance.com,Sparse MoE flagship on Volcano Engine,paper_ia16_verified
+2025-01-28,Alibaba,Qwen 2.5-Max,0,qwenlm.github.io,Closed-source MoE flagship API,paper_ia16_verified
+2025-02-17,xAI,Grok-3,0,x.ai,Flagship reasoning on Colossus,paper_ia16_verified
+2025-03-13,Cohere,Command A,0,cohere.com,111B enterprise 256K context,paper_ia16_verified
+2025-04-29,Alibaba,Qwen 3,0,qwenlm.github.io,Hybrid thinking dense+MoE family,paper_ia16_verified
+2025-06-10,Mistral,Magistral Small+Medium,0,mistral.ai,First Mistral reasoning models,paper_ia16_verified
+2025-07-09,xAI,Grok 4,0,x.ai,Grok 4 / Heavy livestream,paper_ia16_verified

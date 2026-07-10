@@ -42,3 +42,21 @@ grep -n -B2 -A10 "SaaS\|software-as-a-service" paper.txt
 grep -n -B2 -A30 "AppLovin" paper.txt  # §3.4 完整表 + Carvana/AMD
 diff <(curl -sL https://arxiv.org/abs/2606.30583v1) <(curl -sL https://arxiv.org/abs/2606.30583v2)  # v1/v2 差異
 ```
+
+---
+
+# 第二輪補完(2026-07-10,網路開放後)
+
+使用者將 Claude Code web 網路政策改為 full,論文 v1/v2 全文(HTML)與 Figure 3/4 圖檔已下載複核。**三個 ⚠️ 全部定案為 ✅**:
+
+| 項目 | 定案 | 實際內容 |
+|---|---|---|
+| IA.6 貝氏收縮 | ✅ | Panel B:收縮 beta 排序 H−L = **48.2 bps/週 (t=2.42)**(64.1→48.2 = −24.8%)。Panel A:block bootstrap 95% CI **[27.3, 101.9] bps**,排除零 |
+| SaaS loading | ✅(在 **Table IA.5**) | 全樣本 **0.035 (t=0.27)** ≈ 零;最後一個日曆季 **−1.353 (t=−2.69)**(每 1σ AI 衝擊,%/週)。SaaS 名單 = SaaSDB 上市公司 × CRSP |
+| §3.4 排名 | ✅(Figure 3/4 圖檔逐名核對) | 正尾:**#1 AppLovin、#2 Carvana**、#3 Lumentum、#6 Expedia、#8 NRG;負尾:**#1 Moderna、#2 雅詩蘭黛**、#3 ON Semi、#4 Skyworks、**#7 AMD**(負尾滿是半導體:Microchip #15、NXP #21、Qualcomm #28、TI #38) |
+
+方法論教訓:第一輪 Carvana 搜不到的原因是**名單只存在於圖檔內**,全文文字搜尋(HTML 與 PDF)都不會命中——「搜尋不到」不等於「不存在」。
+
+v1→v2 差異:新增 §3.3.4 事件研究小節與 Table 8「排除發布週」穩健性(排除前沿發布週後 H−L 仍 39.5 bps, t=1.96),§4 改名含 Occupations,無數字變動。
+
+額外收穫:論文事件日曆 Table IA.16(19 前沿 + 28 非前沿)已轉存 `data/model_releases_paper_ia16.csv`,Design 1 改用論文日曆為主規格。
