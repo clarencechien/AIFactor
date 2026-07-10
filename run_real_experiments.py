@@ -200,7 +200,8 @@ def design2(m, betas):
 
 def design3(m, betas):
     R = m["ret_w"].values
-    flow = m["flow_w"].reindex(m["ret_w"].index).values
+    flow = m["flow_w"].reindex(index=m["ret_w"].index,
+                               columns=m["ret_w"].columns).values
     cap = np.nanmedian(m["cap_w"].values, axis=0)  # 靜態權重供 double_sort 簡化
     ds = double_sort(R, betas, flow, np.where(np.isnan(cap), 1.0, cap))
     fm_base = fama_macbeth(R, betas)

@@ -89,8 +89,8 @@
 |---|---|---|
 | `data/model_releases_paper_ia16.csv`(19 前沿 + 28 非前沿) | ✅ 論文轉存 | 逐字轉自 v2 Table IA.16;Design 1 主規格用此 |
 | `data/model_releases.csv`(38 事件,knowledge-base 版) | ⚠️ 保留為擴充日曆 | 與論文日曆重疊處日期偏差 ≤1 天(如 Claude 3.5 Sonnet 我方 06-20 vs 論文 06-21);含論文日曆沒有的 2025-08 後事件(Gemini 3、Opus 4.5、GPT-5.1),作延伸樣本穩健性用,URL 仍未逐一回連 |
-| 台股價量/法人資料(TWSE+TPEx) | 🔄 抓取中 | 2026-07-10 網路開放後啟動,2024-01-02 起日頻,officially sourced |
-| OpenRouter 週頻 token 序列 | 🔄 嘗試中 | Wayback 快照回補可行性測試中 |
+| 台股價量/法人資料(TWSE+TPEx) | 🔄 抓取中 | 2026-07-10 網路開放後啟動,2024-01-02 起日頻,officially sourced。TWSE 對 2.5s 間隔觸發 307 限流,以 4s 間隔補洞 |
+| OpenRouter 週頻 token 序列 | ✅ **已建成** | `data/openrouter_weekly.csv`:112 週(2024-03-04 ~ 2026-04-20),4 個 Wayback 快照的內嵌年度圖縫合。品質:51 個重疊週跨快照相對差中位數 0.00%、最大 0.04%;總成長 1179x 與論文「11.4B→15.6T(1368x,起點早兩月)」相容。**限制**:(a) 2024-01~02 缺頭(當時頁面版式只有請求數圖);(b) 2026-05 起頁面改版純 client-side,序列止於 2026-04(= 論文樣本終點);(c) 只有 token 單腿,無美元/用戶腿 |
 | 台股交易日曆 2024–2026 | ⚠️ 近似 | 實際交易日以抓到的 TWSE 資料日期為準(自我修正);tz_map 假日表僅作事件映射輔助 |
 | Hyperscaler capex guidance 逐季數字 | ❌ 未建 | M3 需要;capex 因子先用 SOX 殘差單腿 |
 
