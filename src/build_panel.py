@@ -151,6 +151,7 @@ def build() -> None:
             if (x := parse_tpex_inst(fp)) is not None]
     flows = pd.concat(t86, ignore_index=True) \
         .drop_duplicates(subset=["date", "stock"])
+    prices = prices.drop_duplicates(subset=["date", "stock"], keep="first")
     panel = prices.merge(flows, on=["date", "stock"], how="left")
 
     # 已發行股數(上市 t187ap03_L + 上櫃 mopsfin_t187ap03_O)
