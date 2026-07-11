@@ -1,4 +1,4 @@
-<title>AI 溢酬:論文、分析師與台股實證</title>
+<title>AI 溢酬:一般人版報告 — 論文、分析師與台股實證</title>
 <style>
 :root{
   --bg:#FBFAF7; --surface:#FFFFFF; --ink:#1F2428; --ink2:#59616A; --ink3:#8A9098;
@@ -37,53 +37,63 @@
   --ok:#1E7B34; --no:#B3383A; --mid:#96660D;
 }
 *{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);
   font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Helvetica Neue",sans-serif;
-  font-size:16px;line-height:1.85;-webkit-font-smoothing:antialiased}
-.wrap{max-width:880px;margin:0 auto;padding:0 24px 96px}
+  font-size:16px;line-height:1.9;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px 88px}
 h1,h2,h3{font-family:"Noto Serif TC","Songti TC","PMingLiU",Georgia,serif;line-height:1.4;text-wrap:balance}
-h1{font-size:2.1rem;font-weight:700;margin:.4em 0 .3em}
-h2{font-size:1.5rem;font-weight:700;margin:2.6em 0 .6em;padding-top:1.2em;border-top:1px solid var(--line)}
-h3{font-size:1.12rem;font-weight:700;margin:1.8em 0 .4em}
-p{margin:.7em 0;max-width:72ch}
+h1{font-size:clamp(1.5rem,4.5vw,2.1rem);font-weight:700;margin:.4em 0 .3em}
+h2{font-size:clamp(1.25rem,3.4vw,1.5rem);font-weight:700;margin:2.4em 0 .6em;padding-top:1.1em;border-top:1px solid var(--line)}
+h3{font-size:1.1rem;font-weight:700;margin:1.8em 0 .4em}
+p{margin:.7em 0;max-width:70ch}
 a{color:var(--paper)}
 .mono,td.num,th.num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
-.eyebrow{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.2em}
+.eyebrow{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.2em}
 .eb-paper{color:var(--paper)} .eb-analyst{color:var(--analyst)} .eb-exp{color:var(--exp)}
-header.hero{padding:64px 0 8px;border-bottom:3px double var(--line);margin-bottom:8px}
-.hero .sub{color:var(--ink2);font-size:1.02rem;max-width:64ch}
-.meta{color:var(--ink3);font-size:.82rem;margin-top:12px}
-.verdicts{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:28px 0 8px}
-.vcard{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px}
-.vcard .h{font-size:.8rem;font-weight:700;color:var(--ink2);letter-spacing:.06em}
-.vcard .v{font-family:"Noto Serif TC","Songti TC",serif;font-size:1.06rem;font-weight:700;margin:.25em 0 .15em}
-.vcard .d{font-size:.82rem;color:var(--ink2);line-height:1.6}
-.tag{display:inline-block;font-size:.72rem;font-weight:700;padding:1px 8px;border-radius:99px;vertical-align:2px}
+header.hero{padding:52px 0 10px;border-bottom:3px double var(--line);margin-bottom:8px}
+.hero .sub{color:var(--ink2);font-size:1rem;max-width:62ch}
+.meta{color:var(--ink3);font-size:.8rem;margin-top:12px}
+.tldr{counter-reset:tl;display:grid;gap:12px;margin:24px 0 8px;padding:0;list-style:none;max-width:none}
+.tldr>li{counter-increment:tl;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px 14px 54px;position:relative}
+.tldr>li::before{content:counter(tl);position:absolute;left:16px;top:14px;width:26px;height:26px;border-radius:50%;
+  background:var(--exp);color:var(--surface);font-weight:700;font-size:.9rem;display:flex;align-items:center;justify-content:center;
+  font-family:"Noto Serif TC",Georgia,serif}
+.tldr .t{font-weight:700;display:block;margin-bottom:2px}
+.tldr .d{font-size:.9rem;color:var(--ink2);line-height:1.75}
+.tag{display:inline-block;font-size:.72rem;font-weight:700;padding:1px 8px;border-radius:99px;vertical-align:2px;white-space:nowrap}
 .t-ok{background:color-mix(in srgb,var(--ok) 14%,transparent);color:var(--ok)}
 .t-no{background:color-mix(in srgb,var(--no) 13%,transparent);color:var(--no)}
-.t-mid{background:color-mix(in srgb,var(--mid) 15%,transparent);color:var(--mid)}
-section.part{margin-top:16px}
-.partbar{height:3px;border:none;margin:3.2em 0 0}
-.pb-paper{background:var(--paper)} .pb-analyst{background:var(--analyst)} .pb-exp{background:var(--exp)}
-.tblwrap{overflow-x:auto;margin:1.2em 0;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
-table{border-collapse:collapse;width:100%;font-size:.88rem;line-height:1.6}
-th{font-size:.78rem;letter-spacing:.04em;color:var(--ink2);text-align:left;font-weight:700}
-th,td{padding:8px 14px;border-bottom:1px solid var(--line2);vertical-align:top}
+.t-mid{background:color-mix(in srgb,var(--mid) 16%,transparent);color:var(--mid)}
+.qa{margin:1.6em 0;display:grid;gap:14px}
+.qa details{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.qa summary{cursor:pointer;padding:14px 18px;font-weight:700;font-family:"Noto Serif TC","Songti TC",serif;font-size:1.02rem;line-height:1.6;list-style:none;position:relative;padding-right:44px}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{content:"+";position:absolute;right:18px;top:50%;transform:translateY(-50%);color:var(--ink3);font-size:1.3rem;font-family:sans-serif}
+.qa details[open] summary::after{content:"−"}
+.qa summary:focus-visible{outline:2px solid var(--exp);outline-offset:-2px}
+.qa .a{padding:2px 18px 16px;border-top:1px solid var(--line2)}
+.qa .a p{font-size:.94rem}
+.verdict-line{font-size:.82rem;font-weight:700;margin-top:.6em;color:var(--ink2)}
+.tblwrap{overflow-x:auto;margin:1.2em 0;border:1px solid var(--line);border-radius:6px;background:var(--surface);-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:.87rem;line-height:1.6}
+th{font-size:.76rem;letter-spacing:.04em;color:var(--ink2);text-align:left;font-weight:700}
+th,td{padding:8px 13px;border-bottom:1px solid var(--line2);vertical-align:top}
 tbody tr:last-child td{border-bottom:none}
 td.num,th.num{text-align:right;white-space:nowrap}
 thead th{background:color-mix(in srgb,var(--ink) 3%,var(--surface));border-bottom:1px solid var(--line)}
-.note{font-size:.82rem;color:var(--ink3);max-width:76ch}
-.callout{border-left:3px solid var(--paper);background:var(--paper-bg);padding:12px 18px;border-radius:0 6px 6px 0;margin:1.4em 0;max-width:76ch}
+.note{font-size:.82rem;color:var(--ink3);max-width:74ch}
+.callout{border-left:3px solid var(--paper);background:var(--paper-bg);padding:12px 18px;border-radius:0 6px 6px 0;margin:1.4em 0;max-width:74ch}
 .callout.an{border-color:var(--analyst);background:var(--analyst-bg)}
 .callout.ex{border-color:var(--exp);background:var(--exp-bg)}
 .callout p{margin:.4em 0}
-.gloss{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:16px 20px;margin:1.4em 0}
+.gloss{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 18px;margin:1.4em 0}
 .gloss dt{font-weight:700;margin-top:.6em}
 .gloss dd{margin:0 0 .3em;color:var(--ink2);font-size:.9rem}
-figure{margin:1.6em 0;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px 18px 10px}
-figcaption{font-size:.82rem;color:var(--ink2);padding:8px 4px 6px;line-height:1.6}
-figure .cap-t{font-weight:700;color:var(--ink);font-size:.92rem}
-svg{display:block;max-width:100%;height:auto}
+figure{margin:1.6em 0;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 14px 8px}
+figcaption{font-size:.82rem;color:var(--ink2);padding:8px 4px 6px;line-height:1.7}
+figure .cap-t{font-weight:700;color:var(--ink);font-size:.9rem}
+svg{display:block;width:100%;height:auto}
 svg text{font-family:"Noto Sans TC","PingFang TC",sans-serif}
 .axis{stroke:var(--line);stroke-width:1}
 .gridl{stroke:var(--line2);stroke-width:1}
@@ -91,194 +101,153 @@ svg text{font-family:"Noto Sans TC","PingFang TC",sans-serif}
 .dlab{fill:var(--ink2);font-size:11px;font-variant-numeric:tabular-nums}
 .dlab.b{fill:var(--ink);font-weight:700}
 .bar{opacity:.92}.bar:hover{opacity:1;filter:brightness(1.08)}
-.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:.8rem;color:var(--ink2);padding:2px 4px 0}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.8rem;color:var(--ink2);padding:2px 4px 0}
 .sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
-ol,ul{max-width:72ch}
+ol,ul{max-width:70ch;padding-left:1.4em}
 li{margin:.35em 0}
-.footer{margin-top:64px;border-top:1px solid var(--line);padding-top:16px;color:var(--ink3);font-size:.8rem}
+.partbar{height:3px;border:none;margin:3em 0 0}
+.pb-paper{background:var(--paper)} .pb-analyst{background:var(--analyst)} .pb-exp{background:var(--exp)}
+.footer{margin-top:56px;border-top:1px solid var(--line);padding-top:16px;color:var(--ink3);font-size:.8rem}
 .small{font-size:.85rem;color:var(--ink2)}
-kbd.q{font-family:inherit;background:var(--line2);border-radius:4px;padding:0 6px;font-size:.85em}
+@media (max-width:640px){
+  .wrap{padding:0 14px 72px}
+  header.hero{padding:36px 0 10px}
+  th,td{padding:7px 10px}
+  .qa summary{padding:12px 14px;padding-right:40px}
+  .qa .a{padding:2px 14px 14px}
+  .tldr>li{padding:12px 14px 12px 50px}
+  figure{padding:10px 8px 6px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .qa details .a{animation:none}
+}
 </style>
 
 <div class="wrap">
 
 <header class="hero">
-  <span class="eyebrow eb-exp">ai_premium_tw 研究報告 · 2026-07-10</span>
-  <h1>市場在為 AI 定價,但台股沒有跟著付錢<br><span style="font-size:.72em;color:var(--ink2)">《AI Premium》論文 × 分析師評論 × 台股全市場實證</span></h1>
-  <p class="sub">Borri、Liu 與 Tsyvinski 用 380 兆枚真實付費 token 證明:美股正在為「AI 消費曝險」支付每週 64 個基點的溢酬。我們把同一套方法搬到台灣——用 1,994 檔上市櫃股票、607 個交易日、還有從網路時光機挖回來的真實 OpenRouter token 序列——檢驗三個假說。答案很乾淨:<strong>台股的 AI 消費溢酬是零</strong>,而且不是「測不出來」的零,是「可以排除美股量級」的零。</p>
-  <div class="meta">資料:TWSE/TPEx 官方 API · OpenRouter(Wayback 縫合)· arXiv:2606.30583v2 —— 描述性研究,非投資建議,不產生下單清單</div>
+  <span class="eyebrow eb-exp">ai_premium_tw · 一般人版 · 2026-07-10</span>
+  <h1>美股在為 AI 付「保護費」,台股沒有<br><span style="font-size:.7em;color:var(--ink2)">一篇耶魯論文、一位分析師、一場台股全市場實驗,拼出同一個答案</span></h1>
+  <p class="sub">耶魯與 LUISS 的三位學者拿到 380 兆枚「真的有人付錢」的 AI token 帳單,證明美股已經在為 AI 曝險支付額外報酬。我們把同一套方法搬到台灣,用近 2,000 檔股票、兩年半的資料重跑一遍。這份報告先講你拿得走的結論,再回答幾個你可能正想問的問題;統計和實驗細節放在最後,想深挖再看。</p>
+  <div class="meta">描述性研究,不是投資建議,也沒有任何一檔股票的買賣訊號。</div>
 </header>
 
-<div class="verdicts">
-  <div class="vcard" style="border-top:3px solid var(--exp)">
-    <div class="h">H1 台股消費因子溢酬 = 0 <span class="tag t-ok">成立</span></div>
-    <div class="v mono">−0.4 bps/週</div>
-    <div class="d">95% 信賴區間 [−41, +40],點估計精確為零,且<strong>排除論文美股的 64.1 bps</strong>。複製了論文「新興市場無溢酬」的發現。</div>
-  </div>
-  <div class="vcard" style="border-top:3px solid var(--exp)">
-    <div class="h">H2 供給端(capex)因子有溢酬 <span class="tag t-no">未獲支持</span></div>
-    <div class="v mono">+16.4 bps/週(t = 0.68)</div>
-    <div class="d">方向為正但遠不顯著。按事前寫死的證偽條件:假說作廢,不硬凹。</div>
-  </div>
-  <div class="vcard" style="border-top:3px solid var(--exp)">
-    <div class="h">H3 溢酬由外資流中介 <span class="tag t-no">不成立</span></div>
-    <div class="v mono">買−賣差 −15.2 bps(t = −0.56)</div>
-    <div class="d">沒有溢酬可被中介;僅有的微弱事件反應走<strong>盤中</strong>而非隔夜跳空——與「ADR 夜盤傳導」預期相反。</div>
-  </div>
-</div>
-
-<!-- ============ PART I ============ -->
-<hr class="partbar pb-paper">
-<section class="part">
-<span class="eyebrow eb-paper">第一部分 · 論文在說什麼</span>
-<h2 style="border:none;padding-top:0;margin-top:.2em">用真金白銀的 token 帳單,量出市場的 AI 曝險定價</h2>
-
-<p>過去衡量「一家公司跟 AI 的關係」,用的都是間接證據:專利數、財報裡提到 AI 幾次、或請語言模型猜哪些職業會被取代。這篇論文的不同之處在資料:<strong>OpenRouter 平台的授權數據——380 兆枚實際付費的 token</strong>,涵蓋四百多個模型、數百萬個匿名帳戶,從 2024 年 1 月到 2026 年 4 月。每一筆都是有人真的掏錢買的 AI 運算,不是問卷、不是論述。</p>
-
-<h3>方法:三步驟</h3>
-<ol>
-  <li><strong>建 AI 因子</strong>:把每週的 token 量、美元支出、活躍用戶數三條成長序列,萃取成一個「本週全球 AI 消費成長了多少」的指數(第一主成分,解釋 56.5% 共變)。</li>
-  <li><strong>算每檔股票的 AI Beta</strong>:用 13 週滾動迴歸,衡量每檔股票的報酬跟這個因子「一起動」的程度(控制大盤後)。Beta 高 = 股價對 AI 消息敏感。</li>
-  <li><strong>分組比較</strong>:每週按 Beta 把股票分成五組,做多最高組、放空最低組(H−L),看這個組合賺不賺錢。</li>
+<!-- ============ TLDR ============ -->
+<h2 style="border:none;padding-top:.4em">先講重點:一般人拿得走的五件事</h2>
+<ol class="tldr">
+  <li><span class="t">「AI 概念股」這個標籤,已經跟真實的 AI 曝險對不上了。</span>
+  <span class="d">美股資料裡,對 AI 最敏感的公司是廣告平台 AppLovin、二手車電商 Carvana、旅遊網站 Expedia、電力公司 NRG——不是輝達。而最「怕」AI 行情的名單裡,竟然擠滿半導體公司(AMD、高通、德儀)。用產業標籤買 AI,買到的可能是別的東西。</span></li>
+  <li><span class="t">市場付錢的對象是「用 AI 用得深的公司」,不是「做 AI 的公司」。</span>
+  <span class="d">溢酬集中在跟「前沿模型、付費用戶、複雜任務」連動的股票;跟開源普及、免費嘗鮮連動的股票,市場不太買單。AI 紅利在需求端的深水區,不在供給端的名片上。</span></li>
+  <li><span class="t">台股沒有這個溢酬——我們測了,是乾淨的零。</span>
+  <span class="d">台灣是 AI 硬體的軍火庫,但台股並沒有為「AI 消費敏感度」支付額外報酬。高曝險組和低曝險組的報酬幾乎一樣。想在台股複製美股的 AI 選股邏輯,兩年半的資料說:這裡沒有那個因子。</span></li>
+  <li><span class="t">就算在美股,這個訊號也不是你能賺的錢。</span>
+  <span class="d">論文作者、分析師、我們三方難得完全一致:樣本只有兩年多、四分之一的訊號其實是統計噪音、週週換股的交易成本會吃光一切。它是理解市場的顯微鏡,不是下單清單。</span></li>
+  <li><span class="t">真正該帶走的問題:你手上的公司,AI 是在放大它的護城河,還是在溶解它?</span>
+  <span class="d">市場已經開始對軟體服務(SaaS)公司問這個問題了——去年最後一季,上市 SaaS 股票對 AI 消息的反應由「無感」轉為「顯著下跌」。這個問題很快會輪到每一個產業。</span></li>
 </ol>
 
+<!-- ============ 反思 ============ -->
+<h2>三個反思</h2>
+
+<h3>反思一:台灣賺 AI 的錢,跟台股反映 AI 的風險,是兩件事</h3>
+<p>台積電的營收確實因 AI 暴增——那是<strong>基本面</strong>。但我們測的是另一件事:當全世界的 AI 使用量暴增或急凍時,台股的股價會不會系統性地跟著動、而且高敏感的股票有沒有拿到補償。答案是沒有。論文對此有個漂亮的解釋:AI 風險溢酬只出現在「離 AI 消費前沿近」的市場(美國、歐洲),新興市場一律沒有,中國甚至是負的。台股是供應鏈的核心,卻不是消費前沿——<strong>訂單流向台灣,風險定價留在美國</strong>。</p>
+
+<h3>反思二:標籤失效的年代,分類要重新做</h3>
+<p>過去「蘋概股」好用,是因為蘋果的訂單直接寫進這些公司的損益表。但 AI 曝險不走供應鏈邏輯:美股資料顯示 AI 的「受惠名單」橫跨旅遊、電力、零售,而「受害或絕緣名單」裡有化妝品(雅詩蘭黛)、疫苗(Moderna)、還有你以為的鐵桿受惠者半導體。原因不難懂:市場定價的是「AI 改變這家公司命運的程度」,而不是「這家公司賣不賣 AI 零件」。</p>
+
+<h3>反思三:「沒有發現」也是發現,前提是誠實</h3>
+<p>這次實驗三個假說死了兩個(台股供給端溢酬、外資中介通道都不成立)。我們在動手前就把「怎樣算失敗」寫死,結果出來就認。金融研究最大的陷阱是翻資料翻到「看起來有效」為止——我們反著做,所以這個「零」值得信。</p>
+
+<!-- ============ QA ============ -->
+<h2>Q&A:你可能正想問的</h2>
+<div class="qa">
+
+<details open>
+<summary>SaaS(軟體服務股)被打到低估了嗎?可以撿了嗎?</summary>
+<div class="a">
+<p>論文附錄裡的證據是:上市 SaaS 股票組合過去對 AI 消息「無感」,但<strong>樣本最後一季轉為顯著負反應</strong>——AI 用量成長的好消息,現在是 SaaS 的壞消息。這叫「市場開始為被取代的風險定價」。</p>
+<p>但注意:「開始定價」和「定價完了」是兩回事。這個證據只告訴你重新定價<strong>正在進行</strong>,完全沒有告訴你跌得夠不夠、哪一家會活下來。現在買 SaaS,你賭的是「市場反應過度」或「這家公司的護城河 AI 溶解不掉」——這是逐家公司的判斷,不是類股判斷。分析師那句話就是最好的檢查清單:<strong>「AI 是在放大它的護城河(它的客戶關係、資料、工作流嵌得更深),還是在溶解它(它賣的東西 AI 直接就能做)?」</strong></p>
+<p class="verdict-line">資料能說的:重新定價進行中 ✓ · 資料不能說的:是否超跌、何時買 ✗</p>
+</div>
+</details>
+
+<details>
+<summary>傳產、民生股輪動了嗎?百事、可口可樂這種會接棒嗎?</summary>
+<div class="a">
+<p>有輪動,但方向跟「民生接棒」相反。論文的產業掃描顯示:AI 曝險最正的產業是<strong>零售和耐久消費品</strong>(還有個股層面的旅遊、電力),而<strong>民生必需品(可樂、日用品這類)和醫療保健是唯二平均為負的產業</strong>——雅詩蘭黛就在全美股負曝險第二名。</p>
+<p>怎麼理解?市場認為 AI 的生產力紅利會流向「能用 AI 改造獲客、定價、營運」的消費公司,而必需品的需求和品牌護城河跟 AI 關係不大——AI 大行情時它們相對落後。不過負曝險有另一面:<strong>如果 AI 行情反轉,這些股票相對抗跌</strong>。所以百事可樂們在 AI 時代的角色不是「下一棒」,而是「AI 曝險的避風港」。要不要這個避風港,取決於你對 AI 行情本身的看法。</p>
+<p class="verdict-line">資料能說的:民生必需品是 AI 絕緣體/對沖 ✓ · 資料不能說的:輪動時點 ✗</p>
+</div>
+</details>
+
+<details>
+<summary>台積電是不是跟著 ADR 走?台股只是美股的影子嗎?</summary>
+<div class="a">
+<p>先分清楚兩件事。「台積電開盤價跟前晚 ADR 高度相關」——這是眾所周知的價格水準傳導,我們沒有重測,也不需要懷疑。我們測的是更細的問題:<strong>台股跟 AI 有關的「差異化反應」(高曝險股 vs 低曝險股的差距),是不是從美股夜盤傳過來的?</strong></p>
+<p>方法是把每天的報酬拆成兩段:隔夜跳空(昨收到今開,反映美股夜盤的消息)和盤中(今開到今收,反映本地交易時段的定價)。結果出乎我們自己的預期:<strong>AI 相關的微弱訊號幾乎全部出現在本地盤中,隔夜通道反而是零甚至負的</strong>。前沿模型發布後五天,高低曝險組的差距 +0.28%(統計上不顯著),其中盤中貢獻 +0.36%、隔夜 −0.04%。</p>
+<p>白話:就 AI 這件事,台股不是被動接收美股答案的影子市場——如果有任何定價,是台北的交易時段自己做的,只是量太小、統計上站不住。我們原本假設「外資買超+隔夜跳空」是溢酬的通道,這個假說被資料否決了。</p>
+<p class="verdict-line">資料能說的:AI 差異化反應不走隔夜/外資通道 ✓ · 資料不能說的:個股層級的 ADR 連動(那是另一個研究)✗</p>
+</div>
+</details>
+
+<details>
+<summary>當年有「蘋概股」,現在有「NV 概念股」「AI 概念股」嗎?</summary>
+<div class="a">
+<p>資料給的答案有點掃興:<strong>在「風險被系統性定價」的意義上,台股沒有「AI 概念股」這個因子</strong>。我們用兩把尺量過——真實的全球 AI 用量(OpenRouter token)和半導體特有行情(費半指數殘差)——都排不出高低曝險組的報酬差。台股的 AI 題材漲跌,更像一檔一檔的事件和籌碼行情,而不是一個像「價值股」「動能股」那樣可以被統計捕捉的系統性因子。</p>
+<p>為什麼跟蘋概股年代不一樣?蘋概股的邏輯是訂單:蘋果賣多少,供應鏈賺多少,現金流直接掛鉤。但論文顯示 AI 溢酬屬於「<strong>用 AI 的公司</strong>」(廣告、旅遊、零售平台),不屬於「<strong>造 AI 零件的公司</strong>」——美股的 AMD、高通都在負曝險名單。台股上市公司幾乎全是「造」的那一邊,缺少大型「用 AI」的軟體與平台公司——這可能正是台股溢酬缺席的結構性原因,而不只是統計測不到。</p>
+<p class="verdict-line">資料能說的:台股無系統性 AI 因子;供應鏈邏輯 ≠ AI 曝險邏輯 ✓ · 資料不能說的:個別題材股的短線行情 ✗</p>
+</div>
+</details>
+
+<details>
+<summary>所以美股那個「每週 0.64%」的策略,我可以抄嗎?</summary>
+<div class="a">
+<p>三方一致說不行,理由各自補一刀:</p>
+<ul>
+<li><strong>論文作者自己說</strong>:這是「當前的價格」,不是長期可持續的溢酬;樣本剛好是 AI 大多頭的兩年。</li>
+<li><strong>分析師補刀</strong>:修正統計噪音後溢酬從 64 掉到 48 個基點——四分之一是噪音;再算上每週換股的交易成本,散戶執行等於送錢。</li>
+<li><strong>我們補刀</strong>:我們的模擬顯示,這種長度的樣本連「真溢酬存在時能不能測到」都成問題(64 基點的真溢酬,偵測率只有 38%)。把它當交易訊號,是對統計檢定力的誤解。</li>
+</ul>
+<p class="verdict-line">結論:當顯微鏡 ✓ 當提款機 ✗</p>
+</div>
+</details>
+
+<details>
+<summary>這個研究本身可信嗎?你們怎麼避免「先射箭再畫靶」?</summary>
+<div class="a">
+<p>幾個可以檢查的機制:(1) 三個假說和「怎樣算失敗」在跑資料<strong>之前</strong>就白紙黑字寫死,結果兩個假說死了,我們照登;(2) 每一項事實聲明都有帳本(FACTS.md)記錄來源,查不到的一律標「未驗證」——包括我們一開始查不到分析師說的幾個數字,直到拿到論文全文才升級為「屬實」;(3) 資料全部來自官方或可驗證來源:台灣證交所/櫃買中心 API、arXiv 論文原文、網路時光機快照(不同快照的重疊週數字差異最大只有 0.04%,可交叉驗證);(4) 程式碼和資料全部公開在 GitHub,任何人可以重跑。</p>
+<p>但也請記住它的極限:樣本只有兩年半、AI 大多頭時期、統計檢定力有限。所有結論都是「這段時間的市場長這樣」,不是物理定律。</p>
+</div>
+</details>
+
+</div>
+
+<!-- ============ 我們怎麼做的(白話) ============ -->
+<hr class="partbar pb-exp">
+<span class="eyebrow eb-exp" style="margin-top:2em;display:inline-block">附錄 A · 我們怎麼做的(白話版)</span>
+<h2 style="border:none;padding-top:0;margin-top:.2em">把「AI 曝險」變成一個可以量的數字</h2>
+
+<p><strong>第一步:量全世界每週用了多少 AI。</strong>論文用的是 OpenRouter 平台的內部授權資料(380 兆枚付費 token)。我們拿不到內部資料,但發現他們的公開排行榜網頁裡藏著「過去一年」的週用量圖表——用網路時光機(Wayback Machine)抓下四個不同時間點的網頁存檔,像拼接衛星照片一樣縫合出 2024 年 3 月到 2026 年 4 月、共 112 週的真實用量序列。兩年間用量成長了一千一百多倍。</p>
+<p><strong>第二步:量每檔股票對它的敏感度。</strong>對台股全部 1,994 檔上市櫃普通股(排除低價股與小型股),用過去 13 週的資料滾動計算:AI 用量暴增的那幾週,這檔股票是不是也特別強?這個敏感度就是它的「AI Beta」。</p>
+<p><strong>第三步:分組對賭。</strong>每週把股票按 AI Beta 分成五組,比較最高組和最低組接下來一週的報酬(市值加權)。如果市場在為 AI 曝險付錢,高的那組應該持續勝出——美股確實如此(每週贏 0.64%),台股則是平手(−0.004%,即下方圖 2 的「無斜率」)。</p>
+<p><strong>加碼兩個台股獨有的檢定。</strong>(a) 事件研究:GPT-5、Claude 4、DeepSeek-R1 這些前沿模型發布後五天,台股高低曝險組有沒有拉開差距?(用論文自己整理的 19 個發布事件日曆);(b) 外資通道:台灣有全世界少見的「每天每檔股票外資買賣超」公開資料,可以檢驗溢酬是不是外資帶進來的。</p>
+
 <div class="gloss">
-  <strong>三個看懂本報告需要的名詞</strong>
+  <strong>三個名詞,看懂下面的圖表就夠</strong>
   <dl>
-    <dt>bps(基點)</dt><dd>0.01%。「64 bps/週」= 每週 0.64%,年化超過 30%——非常大。</dd>
-    <dt>t 值</dt><dd>「這個數字是真的還是運氣」的訊號強度。粗略地說 |t| &gt; 2 才算統計上站得住;t = 0.7 表示跟雜訊分不開。</dd>
-    <dt>H−L(高減低)</dt><dd>最高曝險組報酬減最低曝險組報酬。若市場為曝險付錢,這個差應該持續為正。</dd>
+    <dt>bps(基點)</dt><dd>0.01%。「64 bps/週」= 每週 0.64%,年化超過 30%,非常大。</dd>
+    <dt>t 值</dt><dd>「這數字是真的還是運氣」:粗略說 |t| 大於 2 才站得住;0.7 以下跟擲硬幣沒差。</dd>
+    <dt>信賴區間</dt><dd>「真實值合理範圍」。區間包含 0 = 無法排除沒效果;區間排除某數 = 可以說真實值不是那個數。</dd>
   </dl>
 </div>
 
-<h3>四大發現(全部經本專案對照原文核實)</h3>
-<div class="tblwrap"><table>
-<thead><tr><th>發現</th><th>關鍵數字</th><th>白話</th></tr></thead>
-<tbody>
-<tr><td><strong>1. AI 曝險有溢酬</strong></td><td class="num">64.1 bps/週(t=2.84);五因子+動能調整後 55.9 bps;控科技股/半導體/AI ETF 後仍有 49.5/45.4/63.4</td><td>市場定價的不是「科技股標籤」,是「對 AI 消費成長的敏感度」。</td></tr>
-<tr><td><strong>2. 溢酬集中在深度使用</strong></td><td class="num">閉源 53.4(t=2.47)vs 開源 32.3(t=1.76);付費核心用戶 66.8 vs 新用戶 21.9;長 prompt 54.1 vs 短 33.0</td><td>市場在為「前沿」付錢,不是為「普及」付錢。</td></tr>
-<tr><td><strong>3. 只存在於已開發市場</strong></td><td class="num">DM 17.9 bps(t=2.77)vs EM 5.0(t=0.94);中國 A 股一致為負且不顯著(Table IA.14)</td><td>離 AI 前沿越近的市場,AI 風險才是系統性的。<strong>這正是台股檢定的理論預測。</strong></td></tr>
-<tr><td><strong>4. Agentic AI 大規模採用</strong></td><td class="num">工具呼叫 token 佔比:2024 年近零 → 樣本末 52.2%;單價同步下跌</td><td>代理式 AI 已是 token 消費的主體。</td></tr>
-</tbody></table></div>
-
-<h3>三個容易被忽略、但最有資訊量的角落</h3>
-<div class="tblwrap"><table>
-<thead><tr><th>位置</th><th>內容</th><th>意義</th></tr></thead>
-<tbody>
-<tr><td>附錄 Table IA.6</td><td class="num">修正 Beta 估計噪音(貝氏收縮)後,溢酬 64.1 → <strong>48.2 bps</strong>(t=2.42);bootstrap 信賴區間 [27.3, 101.9]</td><td>約四分之一的表面溢酬其實是估計噪音的極端值,但修正後仍然顯著為正。</td></tr>
-<tr><td>附錄 Table IA.5</td><td class="num">上市 SaaS 組合對 AI 因子的敏感度:全樣本 0.035(≈零,t=0.27)→ <strong>最後一季 −1.353(t=−2.69)</strong></td><td>市場已開始為應用層軟體的「被 AI 取代風險」定價——AI 對 SaaS 從順風轉為逆風。</td></tr>
-<tr><td>正文 §3.4 / 圖 3–4</td><td>最高 AI 曝險:AppLovin、Carvana、Lumentum、Expedia、NRG Energy;最負:Moderna、雅詩蘭黛、ON Semi、AMD</td><td>AI 曝險 ≠ 科技股。正尾有旅遊與電力,<strong>負尾滿是半導體</strong>(AMD、Qualcomm、TI、NXP)。</td></tr>
-</tbody></table></div>
-
-<div class="callout">
-<p><strong>論文 v2 的自我防衛(v1 沒有)</strong>:作者在 7 月 3 日的第二版加了一個檢定——把所有「模型發布週」從樣本中剔除,溢酬仍有 39.5 bps/週(t=1.96)。意思是:溢酬不只是「發布日的驚喜」,它在無新聞的日子也持續累積。這部分回應了下一節分析師的最大質疑,但沒有完全解決(兩年的樣本仍無法區分「風險補償」與「持續的正向驚喜」——作者自己也承認)。</p>
-</div>
-</section>
-
-<!-- ============ PART II ============ -->
-<hr class="partbar pb-analyst">
-<section class="part">
-<span class="eyebrow eb-analyst">第二部分 · 分析師怎麼讀它</span>
-<h2 style="border:none;padding-top:0;margin-top:.2em">「你看到的溢酬,未必是你能賺到的溢酬」</h2>
-
-<p>我們取得一位台灣分析師對這篇論文的完整評論,把其中的論點逐條拆開查核。結果先說:<strong>他對論文內容的 12 條轉述,對照原文與附錄後全數屬實</strong>——包括三個第一輪查核時連搜尋引擎都找不到的細節(48.2 bps、SaaS 轉負、Carvana 排名第二)。這是一位把附錄讀完的評論者,轉述可信。</p>
-
-<h3>他的四個核心判斷(這是觀點,不是事實——但都有依據)</h3>
-<div class="tblwrap"><table>
-<thead><tr><th>判斷</th><th>內容</th><th>我們的查核註記</th></tr></thead>
-<tbody>
-<tr><td><strong>①「事後實現」警告</strong></td><td>兩年樣本正逢 AI 大多頭;年化 30%+ 不可能是長期均衡溢酬,更可能是「一連串正向驚喜的事後實現」。把它當可持續因子外推,是最容易犯的錯。</td><td>與作者自認限制一致。論文 v2 的「剔除發布週」檢定排除了最極端版本(溢酬≠純新聞日效應),但無法排除慢性 underreaction。<strong>成立且重要。</strong></td></tr>
-<tr><td><strong>② 噪音警告</strong></td><td>13 週滾動 Beta 噪音極大,約 25% 訊號來自噪音極端值;加上週頻再平衡成本,散戶不可執行。研究價值是「描述性的顯微鏡」,不是選股清單。</td><td>64.1→48.2 = −24.8%,他的「25%」精確命中附錄數字。我們的模擬獨立佐證:beta 估計噪音吃掉約一半的可回收溢酬。<strong>成立。</strong></td></tr>
-<tr><td><strong>③ SaaS 重新體檢</strong></td><td>市場開始為應用層的「被取代風險」定價;價值鏈定價權向基礎設施與前沿模型集中。持有軟體平台該問的不是「有沒有 AI 功能」,而是「AI 在放大還是溶解護城河」。</td><td>依據 Table IA.5,數字屬實。推論方向與「溢酬集中前沿」(發現 2)互證,邏輯自洽。</td></tr>
-<tr><td><strong>④ 標籤失效</strong></td><td>AI 曝險已是橫跨零售、能源、金融的擴散現象,部分半導體反而在負曝險名單。「買科技股表達 AI 觀點」的時代可能已過。</td><td>排名表屬實。論文附錄 IA.5 進一步顯示:FF10 高科技產業的平均曝險其實只有中度——半導體強正被其他科技股的負曝險抵消。</td></tr>
-</tbody></table></div>
-
-<div class="callout an">
-<p><strong>他的總評:「數據 A、執行 B+、因果解讀 C+。當顯微鏡是近年最好的一篇;當選股訊號就先不要了。」</strong>我們在台股資料上跑完三個實驗後,對這個評分沒有異議——而且台股結果會讓「當選股訊號就先不要了」這句話變得更具體(見第三部分)。</p>
-<p class="small">唯一需要校準的細節:他說開源模型的訊號「市場不買帳」——精確地說是 32.3 bps、t=1.76,是「不顯著」而不是「零」;以及「中國甚至是負的」——負但統計上不顯著。</p>
-</div>
-</section>
-
-<!-- ============ PART III ============ -->
+<!-- ============ 統計結果 ============ -->
 <hr class="partbar pb-exp">
-<section class="part">
-<span class="eyebrow eb-exp">第三部分 · 我們在台股做了什麼、發現什麼</span>
-<h2 style="border:none;padding-top:0;margin-top:.2em">把同一把尺搬到台灣:三個假說,三個乾淨的答案</h2>
+<span class="eyebrow eb-exp" style="margin-top:2em;display:inline-block">附錄 B · 統計結果(給想看數字的人)</span>
+<h2 style="border:none;padding-top:0;margin-top:.2em">四張核心證據</h2>
 
-<p>台灣是 AI <strong>供應鏈</strong>的核心(晶圓、伺服器、散熱、電源),但論文說 AI <strong>消費</strong>溢酬只存在於離前沿最近的市場。這個張力給了我們三個可證偽的假說,證偽條件在動手前就寫死:</p>
-<ol>
-  <li><strong>H1</strong>:台股對 AI 消費因子的溢酬統計上為零(= 複製論文的新興市場發現)。</li>
-  <li><strong>H2</strong>:台股的 AI 曝險本質是供給端的——對「AI 資本支出因子」應有正溢酬。</li>
-  <li><strong>H3</strong>:若有溢酬,實現應由外資流中介(集中於外資買超股、透過隔夜跳空傳導)。</li>
-</ol>
-
-<h3>資料:全部自建、全部可溯源</h3>
-<div class="tblwrap"><table>
-<thead><tr><th>資料</th><th class="num">規模</th><th>來源與品質</th></tr></thead>
-<tbody>
-<tr><td>台股日價量(上市+上櫃)</td><td class="num">1,994 檔 × 607 交易日</td><td>TWSE / TPEx 官方 API 逐日抓取。發現並修復官方 API 在限流時回傳錯誤日期資料的 quirk(5 檔)。</td></tr>
-<tr><td>三大法人外資買賣超</td><td class="num">個股 × 日</td><td>TWSE T86 / TPEx 對應端點——台股獨有、美股沒有的資料優勢。</td></tr>
-<tr><td><strong>OpenRouter 週頻 token 量</strong></td><td class="num">112 週(2024-03 ~ 2026-04)</td><td>本專案最大的資料突破:發現 OpenRouter 排行頁內嵌「過去一年」的週頻圖表,用 4 個錯開的網路時光機(Wayback)快照縫合出全樣本。51 個重疊週的跨快照差異最大僅 0.04%;總成長 1,179 倍,與論文揭露的軌跡相容。</td></tr>
-<tr><td>供給端因子代理</td><td class="num">週頻</td><td>費城半導體指數(SOX)對 S&amp;P 500 迴歸後的殘差——把「半導體特有的驚喜」從大盤中純化出來。</td></tr>
-<tr><td>模型發布日曆</td><td class="num">19 前沿 + 28 非前沿</td><td>直接轉錄論文附錄 Table IA.16(作者手工整理、附來源),另建 2026 年延伸日曆。</td></tr>
-</tbody></table></div>
-
-<p class="note">誠實標註:我們的消費因子只有 token 量一條腿(論文有 token、美元、用戶三條);股價未還原權息;市值用當期股數近似。這些會讓檢定力變弱,不會製造假訊號。</p>
-
-<h3>先問一個殘酷的問題:這個檢定測得出東西嗎?</h3>
-<p>在跑真實資料前,我們先用約 2,400 次模擬做了檢定力分析(power analysis):假設台股「真的有」某個大小的溢酬,107 週的樣本能偵測到的機率是多少?</p>
-
-<figure>
-  <svg viewBox="0 0 620 300" role="img" aria-label="檢定力曲線:注入溢酬大小對偵測機率">
-    <line class="gridl" x1="52" y1="240" x2="592" y2="240"/>
-    <line class="gridl" x1="52" y1="185" x2="592" y2="185"/>
-    <line class="gridl" x1="52" y1="130" x2="592" y2="130"/>
-    <line class="gridl" x1="52" y1="75" x2="592" y2="75"/>
-    <line class="gridl" x1="52" y1="20" x2="592" y2="20"/>
-    <text class="ticklab" x="44" y="244" text-anchor="end">0%</text>
-    <text class="ticklab" x="44" y="189" text-anchor="end">25%</text>
-    <text class="ticklab" x="44" y="134" text-anchor="end">50%</text>
-    <text class="ticklab" x="44" y="79" text-anchor="end">75%</text>
-    <text class="ticklab" x="44" y="24" text-anchor="end">100%</text>
-    <line class="axis" x1="52" y1="240" x2="592" y2="240"/>
-    <text class="ticklab" x="52" y="258" text-anchor="middle">0</text>
-    <text class="ticklab" x="136" y="258" text-anchor="middle">10</text>
-    <text class="ticklab" x="220" y="258" text-anchor="middle">20</text>
-    <text class="ticklab" x="304" y="258" text-anchor="middle">30</text>
-    <text class="ticklab" x="590" y="258" text-anchor="middle">64</text>
-    <text class="ticklab" x="322" y="284" text-anchor="middle">真實溢酬大小(bps/週)</text>
-    <line x1="220" y1="20" x2="220" y2="240" stroke="var(--ink3)" stroke-width="1" stroke-dasharray="3 4"/>
-    <text class="ticklab" x="226" y="34">≈ 已開發市場量級</text>
-    <line x1="590" y1="20" x2="590" y2="240" stroke="var(--ink3)" stroke-width="1" stroke-dasharray="3 4"/>
-    <text class="ticklab" x="584" y="34" text-anchor="end">論文美股量級</text>
-    <polyline fill="none" stroke="var(--s1)" stroke-width="2"
-      points="52,233.4 136,229 220,220.2 304,208.1 590,156.4"/>
-    <polyline fill="none" stroke="var(--s2)" stroke-width="2" stroke-dasharray="6 4"
-      points="52,229 136,224.6 220,221.3 304,214.7 590,176.2"/>
-    <g fill="var(--s1)">
-      <circle cx="52" cy="233.4" r="4"><title>0 bps → 3.0%(型一誤差,正確)</title></circle>
-      <circle cx="136" cy="229" r="4"><title>10 bps → 5.0%</title></circle>
-      <circle cx="220" cy="220.2" r="4"><title>20 bps → 9.0%</title></circle>
-      <circle cx="304" cy="208.1" r="4"><title>30 bps → 14.5%</title></circle>
-      <circle cx="590" cy="156.4" r="4"><title>64 bps → 38.0%</title></circle>
-    </g>
-    <g fill="var(--s2)">
-      <circle cx="52" cy="229" r="4"><title>0 bps → 5.0%</title></circle>
-      <circle cx="136" cy="224.6" r="4"><title>10 bps → 7.0%</title></circle>
-      <circle cx="220" cy="221.3" r="4"><title>20 bps → 8.5%</title></circle>
-      <circle cx="304" cy="214.7" r="4"><title>30 bps → 11.5%</title></circle>
-      <circle cx="590" cy="176.2" r="4"><title>64 bps → 29.0%</title></circle>
-    </g>
-    <text class="dlab b" x="562" y="148" text-anchor="end">38%</text>
-    <text class="dlab" x="562" y="192" text-anchor="end">29%</text>
-  </svg>
-  <div class="legend"><span><span class="sw" style="background:var(--s1)"></span>論文級三腿因子</span><span><span class="sw" style="background:var(--s2)"></span>我們的降級單腿因子(虛線)</span></div>
-  <figcaption><span class="cap-t">圖 1 · 檢定力曲線:107–130 週的樣本,對中等溢酬幾乎是盲的</span><br>每點 = 200 次模擬。即使台股真有論文美股量級(64 bps/週)的溢酬,偵測機率也只有約三分之一;已開發市場量級(≈18–20 bps)的偵測率不到 10%。<strong>因此「不顯著」本身沒有資訊量——結論必須寫成信賴區間</strong>,這是本研究方法上最重要的自我約束。</figcaption>
-</figure>
-
-<h3>結果一(H1):台股的 AI 消費溢酬是「有內容的零」</h3>
-<p>用真實 OpenRouter 因子排序,做多高 Beta、放空低 Beta,94 個交易週的結果:</p>
-
+<h3>B1 · 台股五分位:沒有斜率,就是沒有定價</h3>
 <figure>
   <svg viewBox="0 0 620 270" role="img" aria-label="五分位組平均週報酬,消費因子與供給因子">
     <line class="gridl" x1="52" y1="210" x2="592" y2="210"/>
@@ -290,7 +259,6 @@ kbd.q{font-family:inherit;background:var(--line2);border-radius:4px;padding:0 6p
     <text class="ticklab" x="44" y="94" text-anchor="end">40</text>
     <text class="ticklab" x="44" y="34" text-anchor="end">60 bps</text>
     <line class="axis" x1="52" y1="210" x2="592" y2="210"/>
-    <!-- groups: Q1..Q5, two bars each. cons: 29.3,20.7,41.3,37.3,28.8 | sox:28.0,25.0,37.0,14.3,44.4 ; y=210-3*v -->
     <g class="bar" fill="var(--s1)">
       <rect x="76"  y="122.1" width="34" height="87.9" rx="3"><title>消費 Q1(最低Beta):29.3 bps</title></rect>
       <rect x="184" y="147.9" width="34" height="62.1" rx="3"><title>消費 Q2:20.7 bps</title></rect>
@@ -319,36 +287,10 @@ kbd.q{font-family:inherit;background:var(--line2);border-radius:4px;padding:0 6p
     <text class="ticklab" x="322" y="254" text-anchor="middle">AI Beta 五分位(市值加權平均週報酬)</text>
   </svg>
   <div class="legend"><span><span class="sw" style="background:var(--s1)"></span>消費因子(OpenRouter token)</span><span><span class="sw" style="background:var(--s2)"></span>供給因子(SOX 殘差)</span></div>
-  <figcaption><span class="cap-t">圖 2 · 台股五分位組報酬:沒有任何斜率</span><br>如果台股在為 AI 曝險付錢,長條應從左到右遞增(像論文的美股一樣)。實際上高低組幾乎一樣高,中間反而最高——教科書級的「無定價」形狀。對照論文美股:Q5 比 Q1 每週高 64 bps。</figcaption>
+  <figcaption><span class="cap-t">若台股在為 AI 曝險付錢,長條應由左往右遞增(美股就是)。實際上高低組一樣高、中間最高——教科書級的「無定價」。</span><br>H−L(高減低):消費因子 −0.4 bps/週(t=−0.02),95% 信賴區間 [−41, +40],<strong>排除美股的 64.1 bps</strong>;供給因子 +16.4 bps(t=0.68),不顯著。動能糾纏檢查乾淨(Q1 0.018 vs Q5 0.019)。94 個交易週。</figcaption>
 </figure>
 
-<div class="tblwrap"><table>
-<thead><tr><th>檢定</th><th class="num">消費因子(H1 主檢定)</th><th class="num">供給因子(H2)</th></tr></thead>
-<tbody>
-<tr><td>H−L 價差(市值加權)</td><td class="num"><strong>−0.4 bps/週</strong>(t = −0.02)</td><td class="num">+16.4 bps/週(t = 0.68)</td></tr>
-<tr><td>95% 信賴區間</td><td class="num"><strong>[−41.2, +40.3]</strong></td><td class="num">[−30.6, +63.4]</td></tr>
-<tr><td>Fama-MacBeth λ</td><td class="num">不顯著(t = 0.36)</td><td class="num">不顯著(t = −0.20)</td></tr>
-<tr><td>動能糾纏檢查</td><td class="num">乾淨(Q1 0.018 vs Q5 0.019)</td><td class="num">乾淨</td></tr>
-</tbody></table></div>
-
-<div class="callout ex">
-<p><strong>為什麼說這是「有內容的零」:</strong>檢定力分析告訴我們,單純的「不顯著」在這個樣本長度下毫無意義(圖 1)。但信賴區間不一樣——台股 H−L 的 95% 區間上界是 +40 bps/週,<strong>低於論文美股的 64.1 bps</strong>。所以我們可以說的不是「台股沒測到」,而是「台股不可能有美股那種量級的 AI 消費溢酬」。這正是論文發現 3 的預測:台股是全球 AI 供應鏈的核心,但它的股市離「AI 消費前沿」很遠——溢酬跟著消費前沿走,不跟著供應鏈走。</p>
-</div>
-
-<h3>結果二(H2):供給端假說,作廢</h3>
-<p>「台股的 AI 曝險是供給端的」聽起來太合理了——所以更需要資料檢驗。SOX 殘差因子的 H−L 是 +16.4 bps,方向對,但 t 值只有 0.68,跟雜訊無法區分。我們在動手前寫死的規則是:「若 H2 不成立,供給端因子假說作廢,不硬凹。」執行之。(註:此因子是缺了資本支出指引腿的降級代理,「作廢」指本次檢定未獲支持,不是宣告永久死刑。)</p>
-
-<h3>結果三(H3):外資不是通道,盤中才是(如果有東西的話)</h3>
-<p>台股有一項美股沒有的資料:每天每檔股票的外資買賣超。H3 預測溢酬應集中在「高 Beta × 外資買超」的格子,且透過隔夜跳空(美股夜盤→台股開盤)傳導。三個檢定,三個否定:</p>
-<ul>
-  <li><strong>雙重排序</strong>:溢酬在外資買超組(−6.9 bps)、中間組(−21.3)、賣超組(+8.3)全都不存在;買−賣差 −15.2 bps(t = −0.56),方向甚至相反。</li>
-  <li><strong>中介迴歸</strong>:控制外資流後,Beta 的價格從 87.8 變成 102.1——完全沒有衰減(如果外資是通道,應該大幅縮水)。</li>
-  <li><strong>通道拆解</strong>:把 H−L 拆成隔夜(−23.5 bps,t=−1.3)與盤中(+18.5 bps,t=1.0)——僅有的一點正訊號在<strong>本地盤中</strong>,不在隔夜跳空。與「ADR 傳導」的預期方向相反。</li>
-</ul>
-
-<h3>結果四(事件研究):前沿模型發布日,台股有反應嗎?</h3>
-<p>用論文自己的日曆(19 個前沿發布事件,台股樣本內可用 17 個),量發布後五個交易日、高低 Beta 組的累積異常報酬差:</p>
-
+<h3>B2 · 事件研究:反應微弱,而且走「本地盤中」不走「隔夜傳導」</h3>
 <figure>
   <svg viewBox="0 0 620 300" role="img" aria-label="事件研究:五日累積異常報酬 H−L,依通道與事件類型">
     <line class="gridl" x1="72" y1="35"  x2="592" y2="35"/>
@@ -361,8 +303,6 @@ kbd.q{font-family:inherit;background:var(--line2);border-radius:4px;padding:0 6p
     <text class="ticklab" x="64" y="149" text-anchor="end">0</text>
     <text class="ticklab" x="64" y="204" text-anchor="end">−0.2%</text>
     <text class="ticklab" x="64" y="259" text-anchor="end">−0.4%</text>
-    <!-- y = 145 - v*275 ; groups: total, overnight, intraday -->
-    <!-- frontier: .281 -> 77.3h; -.043; .355 -> 97.6h ; placebo: -.056; -.315 -> 86.6 below; .275 -->
     <g class="bar" fill="var(--s1)">
       <rect x="116" y="67.7" width="40" height="77.3" rx="3"><title>前沿 · 總報酬:+0.281%(t=1.26,p=0.20)</title></rect>
       <rect x="292" y="145"  width="40" height="11.8" rx="3"><title>前沿 · 隔夜:−0.043%(t=−0.29)</title></rect>
@@ -384,53 +324,82 @@ kbd.q{font-family:inherit;background:var(--line2);border-radius:4px;padding:0 6p
     <text class="ticklab" x="511" y="285" text-anchor="middle">盤中通道</text>
   </svg>
   <div class="legend"><span><span class="sw" style="background:var(--s1)"></span>前沿發布(17 事件)</span><span><span class="sw" style="background:var(--s2)"></span>非前沿安慰劑(19 事件)</span></div>
-  <figcaption><span class="cap-t">圖 3 · 事件研究:反應微弱、統計不顯著,而且走「錯」的通道</span><br>發布後五日的高低 Beta 組報酬差。前沿事件 +0.28%(不顯著;對照論文美股 +1.9%、t=4.17),且全部來自盤中(+0.36%,邊際)而非隔夜(−0.04%)。如果台股是被美股夜盤「傳導」,訊號應該在隔夜——實際相反,弱訊號屬於本地盤中交易。安慰劑的隔夜負值(−0.32%)無事前假說,誠實列為待解釋的異常。</figcaption>
+  <figcaption><span class="cap-t">前沿模型發布後五日,高低曝險組差距 +0.28%(不顯著;美股同設計是 +1.9%、t=4.17),且全部來自盤中。</span><br>安慰劑的隔夜負值(−0.32%,t=−3.44)無事前假說,誠實列為待解釋異常,不納入結論。外資雙重排序與中介迴歸同樣否定外資通道(買−賣差 −15.2 bps,t=−0.56;控制外資流後溢酬估計不減反增)。</figcaption>
 </figure>
 
-<h3>台股結論:一句話版本</h3>
-<div class="callout ex">
-<p><strong>台股不為「AI 消費」曝險付溢酬(H1 成立、可排除美股量級),供給端假說未獲資料支持(H2 作廢),外資也不是隱形通道(H3 不成立)。台股身為 AI 硬體軍火庫,它的股市卻不定價 AI 消費風險——這精確複製了論文「溢酬只屬於消費前沿市場」的世界觀。</strong>對台灣投資人的含義:直接把美股的 AI Beta 邏輯搬到台股選股,兩年的資料說「這裡沒有那個因子」。</p>
-</div>
-</section>
+<h3>B3 · 檢定力:為什麼我們只敢講「區間」</h3>
+<figure>
+  <svg viewBox="0 0 620 300" role="img" aria-label="檢定力曲線:注入溢酬大小對偵測機率">
+    <line class="gridl" x1="52" y1="240" x2="592" y2="240"/>
+    <line class="gridl" x1="52" y1="185" x2="592" y2="185"/>
+    <line class="gridl" x1="52" y1="130" x2="592" y2="130"/>
+    <line class="gridl" x1="52" y1="75" x2="592" y2="75"/>
+    <line class="gridl" x1="52" y1="20" x2="592" y2="20"/>
+    <text class="ticklab" x="44" y="244" text-anchor="end">0%</text>
+    <text class="ticklab" x="44" y="189" text-anchor="end">25%</text>
+    <text class="ticklab" x="44" y="134" text-anchor="end">50%</text>
+    <text class="ticklab" x="44" y="79" text-anchor="end">75%</text>
+    <text class="ticklab" x="44" y="24" text-anchor="end">100%</text>
+    <line class="axis" x1="52" y1="240" x2="592" y2="240"/>
+    <text class="ticklab" x="52" y="258" text-anchor="middle">0</text>
+    <text class="ticklab" x="136" y="258" text-anchor="middle">10</text>
+    <text class="ticklab" x="220" y="258" text-anchor="middle">20</text>
+    <text class="ticklab" x="304" y="258" text-anchor="middle">30</text>
+    <text class="ticklab" x="590" y="258" text-anchor="middle">64</text>
+    <text class="ticklab" x="322" y="284" text-anchor="middle">假設的真實溢酬(bps/週)</text>
+    <line x1="220" y1="20" x2="220" y2="240" stroke="var(--ink3)" stroke-width="1" stroke-dasharray="3 4"/>
+    <text class="ticklab" x="226" y="34">≈ 已開發市場量級</text>
+    <line x1="590" y1="20" x2="590" y2="240" stroke="var(--ink3)" stroke-width="1" stroke-dasharray="3 4"/>
+    <text class="ticklab" x="584" y="34" text-anchor="end">論文美股量級</text>
+    <polyline fill="none" stroke="var(--s1)" stroke-width="2"
+      points="52,233.4 136,229 220,220.2 304,208.1 590,156.4"/>
+    <polyline fill="none" stroke="var(--s2)" stroke-width="2" stroke-dasharray="6 4"
+      points="52,229 136,224.6 220,221.3 304,214.7 590,176.2"/>
+    <g fill="var(--s1)">
+      <circle cx="52" cy="233.4" r="4"><title>0 bps → 3.0%(型一誤差,正確)</title></circle>
+      <circle cx="136" cy="229" r="4"><title>10 bps → 5.0%</title></circle>
+      <circle cx="220" cy="220.2" r="4"><title>20 bps → 9.0%</title></circle>
+      <circle cx="304" cy="208.1" r="4"><title>30 bps → 14.5%</title></circle>
+      <circle cx="590" cy="156.4" r="4"><title>64 bps → 38.0%</title></circle>
+    </g>
+    <g fill="var(--s2)">
+      <circle cx="52" cy="229" r="4"><title>0 bps → 5.0%</title></circle>
+      <circle cx="136" cy="224.6" r="4"><title>10 bps → 7.0%</title></circle>
+      <circle cx="220" cy="221.3" r="4"><title>20 bps → 8.5%</title></circle>
+      <circle cx="304" cy="214.7" r="4"><title>30 bps → 11.5%</title></circle>
+      <circle cx="590" cy="176.2" r="4"><title>64 bps → 29.0%</title></circle>
+    </g>
+    <text class="dlab b" x="562" y="148" text-anchor="end">38%</text>
+    <text class="dlab" x="562" y="192" text-anchor="end">29%</text>
+  </svg>
+  <div class="legend"><span><span class="sw" style="background:var(--s1)"></span>論文級三腿因子</span><span><span class="sw" style="background:var(--s2)"></span>我們的單腿因子(虛線)</span></div>
+  <figcaption><span class="cap-t">用 2,400 次模擬回答:「如果溢酬是真的,這個樣本測得到嗎?」</span><br>兩年半的樣本,對 20 bps 級別的真溢酬只有不到 10% 的偵測率;連美股量級(64 bps)也只有 38%。所以單獨一句「不顯著」沒有意義——但台股的信賴區間 [−41, +40] 排除了 64,這才是我們敢下結論的原因。這也是全篇對「別人的回測」最實用的一課:<strong>先問檢定力,再信顯著性。</strong></figcaption>
+</figure>
 
-<!-- ============ PART IV ============ -->
-<hr class="partbar pb-exp">
-<section class="part">
-<span class="eyebrow eb-exp">第四部分 · 三方對照與誠實的限制</span>
-<h2 style="border:none;padding-top:0;margin-top:.2em">同一個現象,三個視角的對賬單</h2>
-
+<h3>B4 · 三方對照表</h3>
 <div class="tblwrap"><table>
-<thead><tr><th>問題</th><th style="color:var(--paper)">論文說(美股/全球)</th><th style="color:var(--analyst)">分析師說(判讀)</th><th style="color:var(--exp)">台股資料說(本實驗)</th></tr></thead>
+<thead><tr><th>問題</th><th style="color:var(--paper)">論文(美股/全球)</th><th style="color:var(--analyst)">分析師(判讀)</th><th style="color:var(--exp)">台股資料(本實驗)</th></tr></thead>
 <tbody>
-<tr><td>AI 曝險有沒有被定價?</td><td>有,64.1 bps/週,調整後仍在</td><td>有,但可能是事後驚喜的堆疊,別外推</td><td><strong>台股沒有</strong>:−0.4 bps,CI 排除美股量級</td></tr>
-<tr><td>溢酬屬於誰?</td><td>前沿/閉源/付費/長 prompt(intensive margin)</td><td>定價權向基礎設施與前沿模型集中</td><td>台股連 extensive margin 都不定價——與「離前沿遠」一致</td></tr>
-<tr><td>科技股標籤還有用嗎?</td><td>沒用:控制科技/半導體後溢酬仍在;負尾滿是半導體</td><td>「買科技股表達 AI 觀點」時代已過</td><td>供給端(半導體殘差)因子在台股也排不出溢酬——標籤在這裡同樣失效</td></tr>
-<tr><td>訊號能拿來交易嗎?</td><td>作者不聲稱;自認是「當前價格」非長期溢酬</td><td>不能:噪音 25%、成本吃光、散戶勿試</td><td>更不能:台股根本沒有這個因子;0.3% 證交稅下任何週頻再平衡都不成立</td></tr>
-<tr><td>事件日的反應?</td><td>前沿發布五日 H−L +1.9%(t=4.17),另有 pre-drift</td><td>(未評論)</td><td>+0.28%,不顯著,且走本地盤中而非隔夜傳導</td></tr>
+<tr><td>AI 曝險有被定價嗎?</td><td>有:64.1 bps/週(t=2.84),風險調整後 55.9,噪音修正後 48.2</td><td>有,但可能是「連續驚喜的事後實現」,別外推</td><td><strong>沒有</strong>:−0.4 bps,CI [−41,+40] 排除美股量級</td></tr>
+<tr><td>溢酬屬於誰?</td><td>前沿/閉源/付費/長任務(53.4 vs 開源 32.3)</td><td>定價權向基礎設施與前沿模型集中</td><td>台股連基本盤都不定價——與「離消費前沿遠」一致</td></tr>
+<tr><td>科技股標籤還有用嗎?</td><td>沒用:控制科技/半導體後溢酬仍在;負尾滿是半導體</td><td>「買科技股表達 AI 觀點」時代已過</td><td>半導體殘差因子在台股也排不出溢酬</td></tr>
+<tr><td>SaaS 呢?</td><td>全樣本無感 → 最後一季顯著負(−1.353,t=−2.69)</td><td>「AI 在放大還是溶解護城河?」逐家檢查</td><td>(美股證據;台股無對應大型 SaaS 上市族群)</td></tr>
+<tr><td>能拿來交易嗎?</td><td>作者不聲稱;自認是「當前價格」</td><td>不能:噪音 25%+成本;散戶勿試</td><td>更不能:因子在台股不存在;0.3% 證交稅下週頻策略必死</td></tr>
 </tbody></table></div>
 
-<h3>限制(寫死在專案裡,不因結果好看而刪)</h3>
+<h3>誠實的限制(寫死在專案裡,不因結果好看而刪)</h3>
 <ol>
-  <li><strong>樣本只有兩年多</strong>,且正逢 AI 多頭——論文的「事後實現 vs 均衡溢酬」問題原封不動地適用於我們。所有結論是描述性的。</li>
-  <li><strong>檢定力天花板</strong>:對 20 bps 級別的溢酬,這個樣本長度的偵測率不到 10%(圖 1)。我們因此只主張區間結論,不主張點結論。</li>
-  <li><strong>因子品質不對稱</strong>:消費因子只有 token 單腿(論文為三腿主成分);供給因子缺資本支出指引腿。H1 的「零」經得起(區間窄),H2 的「未獲支持」要保守解讀。</li>
-  <li><strong>未還原權息</strong>:個股跨除息日報酬有向下偏誤;對橫斷面排序影響有限,正式學術版應改還原價。</li>
-  <li><strong>風險補償 vs 錯誤定價無法區分</strong>——這是資料型態的極限,三方(論文、分析師、我們)在這一點上完全一致。</li>
-  <li><strong>探索性異常未消化</strong>:非前沿發布日的隔夜通道顯著為負(t=−3.44),無事前假說,不納入任何結論,留給下一輪。</li>
+  <li>樣本兩年半、正逢 AI 多頭——「風險補償 vs 一連串好運」無法區分,論文和我們都一樣。</li>
+  <li>檢定力天花板(圖 B3):所有「不顯著」都受此約束,我們因此只主張區間結論。</li>
+  <li>我們的消費因子只有 token 量單腿(論文有三腿);供給因子缺資本支出腿。H1 的「零」經得起,H2 的「未支持」要保守讀。</li>
+  <li>股價未還原權息;市值用當期股數近似。影響方向是「訊號變糊」,不是「無中生有」。</li>
+  <li>一個未解之謎誠實留檔:非前沿模型發布日,台股高曝險股的<strong>隔夜</strong>報酬顯著偏負(t=−3.44)——事前沒有這個假說,所以不進結論,留給下一輪。</li>
 </ol>
 
-<h3>如果要繼續做</h3>
-<ul>
-  <li>樣本每多一年,檢定力顯著改善;shadow log 持續累積,無 gap 量測。</li>
-  <li>產業中性版排序(對台股 30+ 產業別 demean)——台股半導體權重極高,值得單獨處理。</li>
-  <li>把消費因子補上美元腿(Wayback 快照內含各模型單價資訊,可嘗試重建)。</li>
-  <li>安慰劑隔夜負值之謎:對齊非前沿發布(多為中國實驗室與開源模型)與同日其他宏觀事件。</li>
-</ul>
-
 <div class="footer">
-  <p>ai_premium_tw 專案 · 2026-07-10 · 資料與程式碼:github.com/clarencechien/AIFactor(branch: claude/ai-premium-paper-review-8o6srq)<br>
+  <p>ai_premium_tw 專案 · 2026-07-10 · 全部程式碼與資料:github.com/clarencechien/AIFactor(branch: claude/ai-premium-paper-review-8o6srq)· 事實帳本:FACTS.md<br>
   原始論文:Borri, N., Liu, Y., &amp; Tsyvinski, A. (2026). <em>AI Premium</em>. arXiv:2606.30583v2 · 分析師貼文經匿名處理<br>
-  本報告為市場定價結構的描述性研究,非投資建議。每項事實聲明可溯源至 FACTS.md 帳本;合成模擬數字(圖 1)驗證的是方法的檢定力,不是任何市場事實。</p>
+  台股樣本:1,994 檔上市櫃普通股 × 607 交易日(2024-01 ~ 2026-07),價格與法人資料取自 TWSE/TPEx 官方 API。本報告為描述性研究,非投資建議。</p>
 </div>
 
 </div>
