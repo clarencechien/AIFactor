@@ -72,6 +72,8 @@ def hl_series(m, betas):
 def summarize(x: pd.Series) -> dict:
     x = x.dropna()
     mean, t = newey_west_t(x.values)
+    if np.isnan(mean) and len(x):          # n<10:NW 不算,仍回報平均(t 留 NaN,只看方向)
+        mean = float(x.mean())
     se = abs(mean / t) if t and not np.isnan(t) else np.nan
     return dict(hl_bps=1e4 * mean, t=t, n_weeks=int(len(x)),
                 ci_bps=[1e4 * (mean - 1.96 * se), 1e4 * (mean + 1.96 * se)],
