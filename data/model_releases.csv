@@ -43,3 +43,28 @@ date_utc,provider,model,frontier_flag,source_url,verification_status,notes
 2026-04-16,Anthropic,Claude Opus 4.7,1,https://www.anthropic.com/news/,websearch_secondary,論文 v2 §2 提及 Opus 4.7 佐證存在;二手來源
 2026-04-23,OpenAI,GPT-5.5,1,https://openai.com/index/,websearch_secondary,二手來源
 2026-04-24,DeepSeek,DeepSeek V4,1,https://api-docs.deepseek.com/,websearch_secondary,開源近前沿;二手來源
+2026-05-28,Anthropic,Claude Opus 4.8,1,https://www.anthropic.com/news/claude-opus-4-8,websearch_secondary,多家媒體一致 5/28;OpenRouter 目錄 5/27 上架
+2026-05-31,MiniMax,MiniMax M3,0,https://openrouter.ai/minimax/minimax-m3,openrouter_catalog,OpenRouter 目錄上架日
+2026-06-04,NVIDIA,Nemotron 3 Ultra,0,https://openrouter.ai/nvidia/nemotron-3-ultra-550b-a55b,openrouter_catalog,
+2026-06-16,Z.ai,GLM 5.2,0,https://openrouter.ai/z-ai/glm-5.2,openrouter_catalog,
+2026-07-09,OpenAI,GPT-5.6 (Luna/Terra),1,https://openrouter.ai/openai/gpt-5.6-luna,openrouter_catalog,二手來源另稱 7/14;採目錄日
+2026-07-16,Moonshot,Kimi K3,0,https://openrouter.ai/moonshotai/kimi-k3,openrouter_catalog,
+2026-07-21,Google,Gemini 3.6 Flash / 3.5 Flash Lite,0,https://openrouter.ai/google/gemini-3.6-flash,openrouter_catalog,
+2026-07-24,Anthropic,Claude Opus 5,1,https://www.anthropic.com/news/claude-opus-5,websearch_secondary,"二手來源 7/24,目錄同日"
+2026-08-03,Alibaba,Qwen3.8 Max,0,https://openrouter.ai/qwen/qwen3.8-max,openrouter_catalog,
+2026-08-12,xAI,Grok 4.6,0,https://openrouter.ai/x-ai/grok-4.6,openrouter_catalog,同日 DeepSeek V4 Pro 0813 更新
+2026-08-18,Z.ai,GLM 5.3,0,https://openrouter.ai/z-ai/glm-5.3,openrouter_catalog,
+2026-09-01,Anthropic,Claude Fable 5.1,1,https://www.anthropic.com/claude/fable,openrouter_catalog,Mythos 級一般可用版;目錄 9/1
+2026-09-03,OpenAI,GPT-6 Astra,1,https://openai.com/index/,websearch_secondary,"二手來源 9/3,目錄 9/4"
+2026-09-10,DeepSeek,DeepSeek V4.1 Flash,0,https://openrouter.ai/deepseek/deepseek-v4.1-flash,openrouter_catalog,11 月已為 OpenRouter 用量第一
+2026-09-21,xAI,Grok 4.7,0,https://openrouter.ai/x-ai/grok-4.7,openrouter_catalog,
+2026-09-22,Anthropic/OpenAI,Claude Opus 5.5 + GPT-6 Luna/Sol,1,https://openrouter.ai/anthropic/claude-opus-5.5,websearch_secondary,"同日兩家旗艦,合併為一事件避免重複計窗"
+2026-09-28,Anthropic,Claude Sonnet 5.5,0,https://openrouter.ai/anthropic/claude-sonnet-5.5,openrouter_catalog,
+2026-09-29,OpenAI,GPT-6.1 Sol,0,https://openrouter.ai/openai/gpt-6.1-sol,openrouter_catalog,"點版本更新,列非前沿"
+2026-10-06,Mistral,Mistral Large 4,0,https://openrouter.ai/mistralai/mistral-large-4-0,openrouter_catalog,
+2026-10-08,StepFun,Step 5 Preview,0,https://openrouter.ai/stepfun/step-5-preview,openrouter_catalog,
+2026-10-12,Meta,Muse Wonder,0,https://openrouter.ai/meta/muse-wonder,openrouter_catalog,
+2026-10-13,Google,Gemini 4 Argon,1,https://blog.google/products/gemini/,websearch_secondary,"多家二手來源 10/13,目錄同日"
+2026-10-23,Moonshot,Kimi K3.1 Pro,0,https://openrouter.ai/moonshotai/kimi-k3.1-pro,openrouter_catalog,
+2026-10-26,OpenAI,GPT-6.1 Terra,0,https://openrouter.ai/openai/gpt-6.1-terra,openrouter_catalog,
+2026-11-04,Tencent,Hy4,0,https://openrouter.ai/tencent/hy4,openrouter_catalog,

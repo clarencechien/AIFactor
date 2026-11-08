@@ -11,7 +11,15 @@
 
 證偽條件寫死於 handoff 文件,不因結果調整。
 
-## 目前狀態(2026-07-10)
+## 目前狀態(2026-11-08 複檢)
+
+- **2026-11 複檢完成**:樣本延長到 2026-11-06(含 2026-06~11 的 AI 股修正與 11-05 費半 −12%),
+  七月結論(H1 成立、H2/H3 不成立)不變;新增「AI 熄火了嗎」三系統診斷(用量/基本面/價格)。
+  報告:`reports/ai_premium_tw_report_2026-11.html`(imitator v3 版式);結果:`reports/real_results_2026-11.json`;
+  執行:`python run_real_experiments_2026_11.py`。資料來源變更(TWSE WAF 封鎖 → 上市 7/13 後改 Yahoo 備援、
+  OpenRouter 改讀圖表 API)詳 `FACTS.md` §4。
+
+## 2026-07-10 狀態(保留)
 
 - **M0 完成**:論文三個 ⚠️ 查核見 `FACTS.md` §1.2–1.3 與 `reports/M0_report.md`
 - **M1–M3 管線完成並以合成資料驗證**:本執行環境網路政策封鎖所有行情/論文資料源
@@ -34,7 +42,11 @@ src/
   synthetic.py              # 合成資料產生器(管線驗證/檢定力專用)
   utils/tz_map.py           # 美國發布日 → 台股 T+1(假日表為近似,需覆核)
   utils/overnight_split.py  # 隔夜/盤中報酬拆解
-run_experiments.py          # 全實驗執行器
+run_experiments.py          # 全實驗執行器(合成資料)
+run_real_experiments.py     # 真實資料實驗(2026-07-10 版)
+run_real_experiments_2026_11.py  # 2026-11 複跑:延長樣本 + 子期間/崩盤週 + token 趨勢診斷
+src/append_panel.py         # 增量更新面板(官方優先,上市缺日用 yahoo_tw_fallback 補)
+src/yahoo_tw_fallback.py    # Yahoo Finance 上市備援 + 與官方重疊期核對
 reports/                    # M0 報告、實驗報告、分析師論點查核
 shadow/                     # 影子模式輸出(取得真實資料後啟用)
 ```
