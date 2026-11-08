@@ -6,7 +6,7 @@ import numpy as np, pandas as pd
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 from svgchart import grouped_bars, lines, datatable, fmt
 
-ROOT = pathlib.Path('/home/user/AIFactor')
+ROOT = pathlib.Path(__file__).resolve().parent.parent
 SCR = pathlib.Path(__file__).resolve().parent  # imitator/report.css 需放在 scripts/imitator/
 R = json.load(open(ROOT / 'reports/real_results_2026-11.json'))
 J = json.load(open(ROOT / 'reports/real_results.json'))
