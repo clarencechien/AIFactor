@@ -75,6 +75,21 @@ def main() -> int:
         fill_dates = sorted(d for d in tpex_dates if d not in have_twse and d > last)
         names = panel[panel.market == "TWSE"].drop_duplicates("stock").set_index("stock")["name"]
         fill = yh[yh["date"].isin(fill_dates)].copy()
+        # Yahoo 的歷史價會依除權/減資回溯調整(重疊期核對:118 檔比值為常數、非 1)。
+        # 為了接點不出現假跳空,用「最後一個官方交易日」的 官方/Yahoo 比值把每檔 Yahoo 序列
+        # 換回官方基準;副作用:該檔若在新期間內除權,其除權日當天不再出現未還原的下跌
+        # (等於該事件被還原),市值在事件後以比值放大 — 寫進 FACTS。
+        last_off = panel[(panel.market == "TWSE") & (panel.date == last)][["stock", "close"]]
+        yh_last = yh[yh.date == last][["stock", "close"]]
+        fac = last_off.merge(yh_last, on="stock", suffixes=("_off", "_yh"))
+        fac["factor"] = fac["close_off"] / fac["close_yh"]
+        fac = fac.set_index("stock")["factor"]
+        fill["factor"] = fill["stock"].map(fac).fillna(1.0)
+        n_adj = int((fill.drop_duplicates("stock")["factor"].sub(1).abs() > 0.005).sum())
+        print(f"yahoo rescale to official basis at {last.date()}: {n_adj} stocks with factor != 1")
+        fill["open"] = fill["open"] * fill["factor"]
+        fill["close"] = fill["close"] * fill["factor"]
+        fill = fill.drop(columns="factor")
         fill["name"] = fill["stock"].map(names)
         fill["amount"] = np.nan
         fill["market"] = "TWSE"
